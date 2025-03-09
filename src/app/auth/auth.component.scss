@@ -1,0 +1,39 @@
+.background-of-profile-selection {
+    background-image: url("../../../public/img/profile-selection-background.png");
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.height-55vh {
+    height: 55vh;
+}
+
+.background-of-card {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.height-60px {
+    height: 60px
+}
+
+// entfernt Farbe des Labels im Inputfield
+.p-floatlabel:has(input:focus) label,
+.p-floatlabel:has(input:-webkit-autofill) label,
+.p-floatlabel:has(textarea:focus) label,
+.p-floatlabel:has(.p-inputwrapper-focus) label {
+    color: inherit !important;
+}
+
+// entfernt Farbe von der Checkbox
+::ng-deep {
+    :root {
+        --p-checkbox-checked-background: transparent;
+        --p-checkbox-checked-hover-background: none;
+        --p-checkbox-checked-border-color: #808080;
+        --p-checkbox-checked-hover-border-color: #808080;
+        --p-checkbox-icon-checked-color: #808080;
+        --p-checkbox-icon-checked-hover-color: #808080;
+    }
+}

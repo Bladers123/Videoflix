@@ -1,1 +1,25 @@
-<p>auth works!</p>
+<div class="flex justify-content-center align-items-center h-screen background-of-profile-selection">
+    <div class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-55vh gap-5">
+        <span class="text-5xl w-9">Einloggen</span>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="value1"
+                autocomplete="on" [ngClass]="{'p-filled': value1}" />
+            <label class="w-full" for="email-input">E-Mail-Adresse</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="value2"
+                autocomplete="on" [ngClass]="{'p-filled': value1}" />
+            <label class="w-full" for="password-input">Passwort</label>
+        </p-floatlabel>
+        <span class="w-9">Platz für Fehlertext</span>
+        <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer">Einloggen</button>
+        <a href="#" class="text-white text-lg">Passwort vergessen?</a>
+        <form class="flex items-center gap-1 w-9">
+            <p-checkbox value="" inputId="user-data" />
+            <label for="user-data" class="ml-2 text-lg">Benutzerdaten merken</label>
+        </form>
+        <span class="w-9 text-lg">Neu bei Netflix?
+            <span>Jetzt registrieren.</span>
+        </span>
+
+    </div>
