@@ -1,14 +1,15 @@
+<!-- auth.component.html -->
 <div class="flex justify-content-center align-items-center h-screen background-of-profile-selection">
     <div class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-55vh gap-5">
         <span class="text-5xl w-9">Einloggen</span>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="value1"
-                autocomplete="on" [ngClass]="{'p-filled': value1}" />
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="email"
+                autocomplete="on" [ngClass]="{'p-filled': email}" />
             <label class="w-full" for="email-input">E-Mail-Adresse</label>
         </p-floatlabel>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="value2"
-                autocomplete="on" [ngClass]="{'p-filled': value1}" />
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="password"
+                autocomplete="on" [ngClass]="{'p-filled': password}" />
             <label class="w-full" for="password-input">Passwort</label>
         </p-floatlabel>
         <span class="w-9">Platz für Fehlertext</span>
@@ -19,7 +20,7 @@
             <label for="user-data" class="ml-2 text-lg">Benutzerdaten merken</label>
         </form>
         <span class="w-9 text-lg">Neu bei Netflix?
-            <span>Jetzt registrieren.</span>
+            <a (click)="register()" href="#" class="ctext-white text-lg">Jetzt registrieren.</a>
         </span>
-
     </div>
+</div>
