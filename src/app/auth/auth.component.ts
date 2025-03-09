@@ -28,13 +28,9 @@ export class AuthComponent {
   email: string = '';
   password: string = '';
   
-  data: UserRegistration  = {
-    email: 'triewrewrsdfdsfstan@tristan.de',
-    username: 'tristwsssserwrewrweran',
-    password: 'Test1234!',
-    repeated_password: 'Test1234!'
-  };
+ 
 
+  registrationDialogVisible: boolean = false;
 
 
   // Fehlertext für die Anzeige von Login-Fehlern
@@ -46,30 +42,15 @@ export class AuthComponent {
   constructor(private authService: AuthService) { }
 
 
+ 
+
   openRegistrationDialog() {
-    this.registrationDialog.openDialog();
+    this.registrationDialogVisible = true;
   }
-
-
-speaterRegistrierung(){
-  this.isLoading = true;
-    this.errorMessage = '';
-
-    // Aufruf des Authentifizierungsservices
-    this.authService.register(this.data)
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe({
-        next: (response) => {
-          // Login erfolgreich – hier kannst du z. B. Navigation, Token-Speicherung etc. durchführen.
-          console.log('Login erfolgreich:', response);
-        },
-        error: (err) => {
-          // Fehlerbehandlung
-          console.error('Login-Fehler:', err);
-          this.errorMessage = 'Fehler beim Einloggen. Bitte überprüfen Sie Ihre Eingaben.';
-        }
-      });
-}
+  
+  closeRegistrationDialog() {
+    this.registrationDialogVisible = false;
+  }
 
 
 

@@ -3,7 +3,7 @@
     <div class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-55vh gap-5 border-round">
         <span class="text-5xl w-9">Einloggen</span>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="email"
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel" [(ngModel)]="email"
                 autocomplete="on" [ngClass]="{'p-filled': email}" />
             <label class="w-full" for="email-input">E-Mail-Adresse</label>
         </p-floatlabel>
@@ -25,4 +25,4 @@
     </div>
 </div>
 
-<app-registration-dialog></app-registration-dialog>
+<app-registration-dialog *ngIf="registrationDialogVisible" (close)="closeRegistrationDialog()"></app-registration-dialog>
