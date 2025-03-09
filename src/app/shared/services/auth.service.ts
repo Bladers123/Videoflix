@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestClientService } from '../rest-client/rest-client.service'; 
+import { UserRegistration  } from '../interfaces/register.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,8 @@ export class AuthService {
 
   constructor(private restClient: RestClientService) {}
 
-  register(username: string, password: string): Observable<any> {
+  register(data: UserRegistration ): Observable<any> {
     const url:string = this.baseUrl + this.endpointRegistration;
-    const body = { username, password };
-    return this.restClient.register(url, body);
+    return this.restClient.register(url, data);
   }
 }

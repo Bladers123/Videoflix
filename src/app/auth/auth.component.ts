@@ -1,5 +1,5 @@
 // auth.component.ts
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -8,12 +8,14 @@ import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthService } from '../shared/services/auth.service';
 import { finalize } from 'rxjs/operators';
+import { UserRegistration  } from '../shared/interfaces/register.interface';
+import { RegistrationDialogComponent } from './registration-dialog/registration-dialog.component';
 
 
 
 @Component({
   selector: 'app-auth',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -21,8 +23,19 @@ import { finalize } from 'rxjs/operators';
 
 export class AuthComponent {
   // Bindings für die Eingabefelder
-  email: string = 'tristan@tristan.de'; // E-Mail-Adresse
-  password: string = 'Test1234!'; // Passwort
+  @ViewChild(RegistrationDialogComponent) registrationDialog!: RegistrationDialogComponent;
+
+  email: string = '';
+  password: string = '';
+  
+  data: UserRegistration  = {
+    email: 'triewrewrsdfdsfstan@tristan.de',
+    username: 'tristwsssserwrewrweran',
+    password: 'Test1234!',
+    repeated_password: 'Test1234!'
+  };
+
+
 
   // Fehlertext für die Anzeige von Login-Fehlern
   errorMessage: string = '';
@@ -30,20 +43,20 @@ export class AuthComponent {
   // Optional: Statusindikator, ob gerade eingeloggt wird
   isLoading: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
-  register(): void {
-    // Prüfen, ob beide Felder ausgefüllt sind
-    if (!this.email || !this.password) {
-      this.errorMessage = 'Bitte E-Mail und Passwort eingeben.';
-      return;
-    }
 
-    this.isLoading = true;
+  openRegistrationDialog() {
+    this.registrationDialog.openDialog();
+  }
+
+
+speaterRegistrierung(){
+  this.isLoading = true;
     this.errorMessage = '';
 
     // Aufruf des Authentifizierungsservices
-    this.authService.register(this.email, this.password )
+    this.authService.register(this.data)
       .pipe(finalize(() => this.isLoading = false))
       .subscribe({
         next: (response) => {
@@ -56,5 +69,18 @@ export class AuthComponent {
           this.errorMessage = 'Fehler beim Einloggen. Bitte überprüfen Sie Ihre Eingaben.';
         }
       });
+}
+
+
+
+
+
+  login(): void {
+    // Logik für die Login-Funktion
+     // Prüfen, ob beide Felder ausgefüllt sind
+     if (false) {
+      this.errorMessage = 'Bitte E-Mail und Passwort eingeben.';
+      return;
+    }
   }
 }
