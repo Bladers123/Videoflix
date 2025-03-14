@@ -9,11 +9,12 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { AuthService } from '../shared/services/auth.service';
 import { RegistrationDialogComponent } from './registration-dialog/registration-dialog.component';
 import { ToastComponent } from '../shared/components/toast/toast.component';
+import { RecoverPasswordDialogComponent } from './recover-password-dialog/recover-password-dialog.component';
 
 
 @Component({
   selector: 'app-auth',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent, ToastComponent],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent, ToastComponent, RecoverPasswordDialogComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -25,6 +26,7 @@ export class AuthComponent implements OnInit {
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
   registrationDialogVisible: boolean = false;
+  recoverPasswordDialogVisible: boolean = false;
 
   isLogged: boolean = false;
 
@@ -64,7 +66,15 @@ export class AuthComponent implements OnInit {
   closeRegistrationDialog() {
     this.registrationDialogVisible = false;
   }
-  
+
+  openRecoverPasswordDialog() {
+    this.recoverPasswordDialogVisible = true;
+  }
+
+  closeRecoverPasswordDialog() {
+    this.recoverPasswordDialogVisible = false;
+  }
+
 
   login() {
     const data = {

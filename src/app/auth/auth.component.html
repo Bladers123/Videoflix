@@ -19,7 +19,7 @@
 
         <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer" [disabled]="isLogged"
             (click)="login()">Einloggen</button>
-        <a href="#" class="text-white text-lg">Passwort vergessen?</a>
+        <a href="#" (click)="openRecoverPasswordDialog()" class="text-white text-lg">Passwort vergessen?</a>
 
 
         <form class="flex items-center gap-1 w-9">
@@ -35,7 +35,9 @@
     </div>
 </div>
 
-<app-registration-dialog *ngIf="registrationDialogVisible"
-    (close)="closeRegistrationDialog()"></app-registration-dialog>
+
+<app-registration-dialog *ngIf="registrationDialogVisible" (close)="closeRegistrationDialog()"></app-registration-dialog>
+
+<app-recover-password-dialog *ngIf="recoverPasswordDialogVisible" (close)="closeRecoverPasswordDialog()"></app-recover-password-dialog>
 
 <app-toast></app-toast>
