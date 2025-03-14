@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecoverPasswordDialogComponent } from './recover-password-dialog.component';
+import { RecoveryPasswordDialogComponent } from './recover-password-dialog.component';
 
 describe('RecoverPasswordDialogComponent', () => {
-  let component: RecoverPasswordDialogComponent;
-  let fixture: ComponentFixture<RecoverPasswordDialogComponent>;
+  let component: RecoveryPasswordDialogComponent;
+  let fixture: ComponentFixture<RecoveryPasswordDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecoverPasswordDialogComponent]
+      imports: [RecoveryPasswordDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RecoverPasswordDialogComponent);
+    fixture = TestBed.createComponent(RecoveryPasswordDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

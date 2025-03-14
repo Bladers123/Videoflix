@@ -5,6 +5,7 @@ import { RestClientService } from '../rest-client/rest-client.service';
 import { UserRegistration } from '../interfaces/register.interface';
 import { map, catchError } from 'rxjs/operators';
 import { UserLogin } from '../interfaces/login.interface';
+import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
 
 
 
@@ -36,38 +37,63 @@ export class AuthService {
     );
   }
 
-loginUser(data: UserLogin): Observable<any> {
-  return this.restClient.postLoginData(data).pipe(
-    map(response => {
-      if (response.successfully) {
-        return 'Login erfolgreich.';
-      } else {
-        return 'Login fehlgeschlagen.';
-      }
-    }),
-    catchError(err => {
-      let errorMsg = 'Login fehlgeschlagen.';
-      if (err.error) {
-        errorMsg = this.extractErrorMessages(err.error);
-      }
-      return throwError(errorMsg);
-    })
-  );
-}
-
-
-private extractErrorMessages(errorResponse: any): string {
-  let errorMessages: string[] = [];
-  for (const field in errorResponse) {
-    if (errorResponse.hasOwnProperty(field)) {
-      const fieldErrors = Array.isArray(errorResponse[field])
-        ? errorResponse[field]
-        : [errorResponse[field]];
-      errorMessages.push(...fieldErrors);
-    }
+  loginUser(data: UserLogin): Observable<any> {
+    return this.restClient.postLoginData(data).pipe(
+      map(response => {
+        if (response.successfully) {
+          return 'Login erfolgreich.';
+        } else {
+          return 'Login fehlgeschlagen.';
+        }
+      }),
+      catchError(err => {
+        let errorMsg = 'Login fehlgeschlagen.';
+        if (err.error) {
+          errorMsg = this.extractErrorMessages(err.error);
+        }
+        return throwError(errorMsg);
+      })
+    );
   }
-  return errorMessages.join('\n');
-}
+
+
+
+  requestRecoverPassword(data: RequestRecoverPassword) {
+    return this.restClient.postRecoveryPasswordData(data).pipe(
+      map(response => {
+        if (response.successfully) {
+          return response.data;
+        } else {
+          return 'E-Mail konnte nicht gesendet werden.';
+        }
+      }),
+      catchError(err => {
+        let errorMsg = 'E-Mail konnte nicht gesendet werden.';
+        if (err.error) {
+          errorMsg = this.extractErrorMessages(err.error);
+        }
+        return throwError(errorMsg);
+      })
+    );
+  }
+
+
+
+
+  private extractErrorMessages(errorResponse: any): string {
+    let errorMessages: string[] = [];
+    for (const field in errorResponse) {
+      if (errorResponse.hasOwnProperty(field)) {
+        const fieldErrors = Array.isArray(errorResponse[field])
+          ? errorResponse[field]
+          : [errorResponse[field]];
+        errorMessages.push(...fieldErrors);
+      }
+    }
+    return errorMessages.join('\n');
+  }
+
+
 
 
 

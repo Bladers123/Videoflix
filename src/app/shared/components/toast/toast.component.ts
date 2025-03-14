@@ -71,4 +71,25 @@ export class ToastComponent {
     await this.waitOfPromise();
   }
 
+
+  
+  async showRequestRecoveryPasswordSuccessfully(message: string = 'Erfolgreich!'){
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  
+  }
+
+
+  async showRequestRecoveryPasswordError(message: string = 'Fehlgeschlagen!'){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
 }

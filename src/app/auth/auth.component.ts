@@ -9,12 +9,12 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { AuthService } from '../shared/services/auth.service';
 import { RegistrationDialogComponent } from './registration-dialog/registration-dialog.component';
 import { ToastComponent } from '../shared/components/toast/toast.component';
-import { RecoverPasswordDialogComponent } from './recover-password-dialog/recover-password-dialog.component';
+import { RecoveryPasswordDialogComponent } from './recover-password-dialog/recover-password-dialog.component';
 
 
 @Component({
   selector: 'app-auth',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent, ToastComponent, RecoverPasswordDialogComponent],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent, ToastComponent, RecoveryPasswordDialogComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })

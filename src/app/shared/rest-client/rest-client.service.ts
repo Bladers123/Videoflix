@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserRegistration } from '../interfaces/register.interface';
 import { environment } from '../../../environments/environment';
 import { UserLogin } from '../interfaces/login.interface';
+import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
 
 
 
@@ -17,7 +18,7 @@ export class RestClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  
+
 
   postRegistrationData(data: UserRegistration): Observable<any> {
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_REGISTRATION, data);
@@ -26,4 +27,11 @@ export class RestClientService {
   postLoginData(data: UserLogin): Observable<any> {
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_LOGIN, data);
   }
+
+  postRecoveryPasswordData(data: RequestRecoverPassword): Observable<any> {    
+     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_RECOVERY_PASSWORD, data);
+  }
+
+
+
 }
