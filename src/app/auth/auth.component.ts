@@ -7,10 +7,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthService } from '../shared/services/auth.service';
-import { finalize } from 'rxjs/operators';
-import { UserRegistration  } from '../shared/interfaces/register.interface';
 import { RegistrationDialogComponent } from './registration-dialog/registration-dialog.component';
-
+import { ToastComponent } from '../shared/components/toast/toast.component';
 
 
 @Component({
@@ -22,13 +20,15 @@ import { RegistrationDialogComponent } from './registration-dialog/registration-
 
 
 export class AuthComponent {
-  // Bindings für die Eingabefelder
+
   @ViewChild(RegistrationDialogComponent) registrationDialog!: RegistrationDialogComponent;
+  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
+
 
   email: string = '';
   password: string = '';
-  
- 
+
+
 
   registrationDialogVisible: boolean = false;
 
@@ -42,12 +42,12 @@ export class AuthComponent {
   constructor(private authService: AuthService) { }
 
 
- 
+
 
   openRegistrationDialog() {
     this.registrationDialogVisible = true;
   }
-  
+
   closeRegistrationDialog() {
     this.registrationDialogVisible = false;
   }
@@ -58,8 +58,8 @@ export class AuthComponent {
 
   login(): void {
     // Logik für die Login-Funktion
-     // Prüfen, ob beide Felder ausgefüllt sind
-     if (false) {
+    // Prüfen, ob beide Felder ausgefüllt sind
+    if (false) {
       this.errorMessage = 'Bitte E-Mail und Passwort eingeben.';
       return;
     }

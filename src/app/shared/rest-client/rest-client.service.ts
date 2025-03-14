@@ -3,17 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class RestClientService {
-  constructor(private httpClient: HttpClient) {
 
-  }
+  constructor(private httpClient: HttpClient) { }
 
-  register(url:string, body:any): Observable<any> {
+  postRegistrationData (url:string, body:any): Observable<any> {
     return this.httpClient.post(url, body);
   }
-
-  
 }

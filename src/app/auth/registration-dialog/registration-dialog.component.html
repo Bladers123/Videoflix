@@ -1,48 +1,59 @@
 <!-- registration-dialog.component.html -->
 <div class="dialog-container">
-    <div class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-5 border-round relative">
-        <img (click)="closeDialog()" class="absolute close w-3rem" src="img/close.png" alt="close">
+    <div
+        class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-5 border-round relative">
+        <img (click)="closeDialog()" class="absolute close w-2rem" src="img/close.png" alt="close">
         <span class="text-5xl w-9">Registrieren</span>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input" [(ngModel)]="username"
                 autocomplete="on" [ngClass]="{'p-filled': username}" />
-            <label class="w-full" for="username-input">Nutzername</label>
+            <label class="w-full" for="username-input">*Nutzername</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="email"
                 autocomplete="on" [ngClass]="{'p-filled': email}" />
-            <label class="w-full" for="email-input">E-Mail-Adresse</label>
+            <label class="w-full" for="email-input">*E-Mail-Adresse</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="firstname-input" [(ngModel)]="first_name"
                 autocomplete="on" [ngClass]="{'p-filled': first_name}" />
             <label class="w-full" for="firstname-input">Vorname</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="lastname-input" [(ngModel)]="last_name"
                 autocomplete="on" [ngClass]="{'p-filled': last_name}" />
             <label class="w-full" for="lastname-input">Nachname</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input" [(ngModel)]="password"
                 autocomplete="on" [ngClass]="{'p-filled': password}" />
-            <label class="w-full" for="password-input">Passwort</label>
+            <label class="w-full" for="password-input">*Passwort</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="repeated-password-input" [(ngModel)]="repeatedPassword"
-                autocomplete="on" [ngClass]="{'p-filled': repeatedPassword}" />
-            <label class="w-full" for="repeated-password-input">Passwort wiederholen</label>
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="repeated-password-input"
+                [(ngModel)]="repeatedPassword" autocomplete="on" [ngClass]="{'p-filled': repeatedPassword}" />
+            <label class="w-full" for="repeated-password-input">*Passwort wiederholen</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="address-input" [(ngModel)]="address"
                 autocomplete="on" [ngClass]="{'p-filled': address}" />
             <label class="w-full" for="address-input">Vollständige Adresse</label>
         </p-floatlabel>
+
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="phone-input" [(ngModel)]="phone"
                 autocomplete="on" [ngClass]="{'p-filled': phone}" />
             <label class="w-full" for="phone-input">Telefonnummer</label>
         </p-floatlabel>
-        <button (click)="register()" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer">Registrieren</button>
+
+        <button (click)="registerUser()" [disabled]="isRegistered" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer">Registrieren</button>
     </div>
+   <app-toast></app-toast>
 </div>

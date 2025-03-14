@@ -5,36 +5,25 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { FormsModule, NgModel } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs/operators';
 import { UserRegistration } from '../../shared/interfaces/register.interface';
 import { AuthService } from '../../shared/services/auth.service';
+import { ToastComponent } from '../../shared/components/toast/toast.component';
 
 
 @Component({
   selector: 'app-registration-dialog',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, ToastComponent],
   templateUrl: './registration-dialog.component.html',
-  styleUrl: './registration-dialog.component.scss'
+  styleUrl: './registration-dialog.component.scss',
 })
 
 
 export class RegistrationDialogComponent {
+
   @Output() close = new EventEmitter<void>();
-  
-  visible: boolean = false;
+  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
-  data: UserRegistration = {
-    email: 's@tristan.de',
-    username: 'ss',
-    password: 'Test1234!',
-    repeated_password: 'Test1234!',
-    first_name: 'd',
-    last_name: 'f',
-    address: 's',
-    phone: 'ffff',
-  };
-
-  isLoading: boolean = false;
+  isRegistered: boolean = false;
 
   password: string = '';
   email: string = '';
@@ -44,32 +33,42 @@ export class RegistrationDialogComponent {
   last_name: string = '';
   address: string = '';
   phone: string = '';
-  
-
 
 
   constructor(private authService: AuthService) { }
 
-  register() {
-    this.isLoading = true;
+  registerUser() {
+    const data: UserRegistration = {
+      email: this.email,
+      username: this.username,
+      password: this.password,
+      repeated_password: this.repeatedPassword,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      address: this.address,
+      phone: this.phone,
+    };
 
-    // Aufruf des Authentifizierungsservices
-    this.authService.register(this.data)
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe({
-        next: (response) => {
-          // Login erfolgreich – hier kannst du z. B. Navigation, Token-Speicherung etc. durchführen.
-          console.log('registrierung erfolgreich:', response);
-        },
-        error: (err) => {
-          // Fehlerbehandlung
-          console.error('Login-Fehler:', err);
-        }
-      });
+    this.authService.createUserAccount(data).subscribe({
+      next: async (message) => {
+        this.isRegistered = true;
+        await this.toastComponent.showRegisterSuccessfully(message);
+        this.closeDialog();
+      },
+      error: async (error) => {
+        this.isRegistered = true;
+        setTimeout(() => {
+          this.isRegistered = false;
+        }, 2000);
+        await this.toastComponent.showRegisterError(error);
+      }
+    });
+
   }
 
   closeDialog() {
-    this.visible = false;
-    this.close.emit(); // Signalisiert der Elternkomponente, dass der Dialog geschlossen werden soll
+    this.close.emit();
   }
+
+
 }
