@@ -30,13 +30,13 @@
         </p-floatlabel>
 
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input" [(ngModel)]="password"
+            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input" [(ngModel)]="password"
                 autocomplete="on" [ngClass]="{'p-filled': password}" />
             <label class="w-full" for="password-input">*Passwort</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="repeated-password-input"
+            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="repeated-password-input"
                 [(ngModel)]="repeatedPassword" autocomplete="on" [ngClass]="{'p-filled': repeatedPassword}" />
             <label class="w-full" for="repeated-password-input">*Passwort wiederholen</label>
         </p-floatlabel>

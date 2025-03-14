@@ -6,12 +6,13 @@
 
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel" [(ngModel)]="rememberUserData.email"
-                autocomplete="on" [ngClass]="{'p-filled': rememberUserData.email}" />
+                autocomplete="on" [ngClass]="{'p-filled': rememberUserData.email}"/>
+                
             <label for="email-input">E-Mail-Adresse</label>
           </p-floatlabel>
           
           <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="rememberUserData.password"
+            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="rememberUserData.password"
                 autocomplete="on" [ngClass]="{'p-filled': rememberUserData.password}" />
             <label for="password-input">Passwort</label>
           </p-floatlabel>
