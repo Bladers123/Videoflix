@@ -4,21 +4,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000; /* hoher z-index, damit der Dialog oben liegt */
+    z-index: 1000;
   }
-  
-  .dialog-container {
-    /* Zentriert den inneren Dialog */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
+
   .dialog-content {
-    /* Inhalt des Dialogs */
-    background-color: rgb(24, 21, 21);    padding: 2rem;
-    border-radius: 0.5rem;
+    background-color: rgb(24, 21, 21);    
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     height: 80vh;
   }
