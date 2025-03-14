@@ -34,7 +34,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/primeflex/primeflex.css",
-              "primeflex/themes/primeone-light.css"  
+              "primeflex/themes/primeone-light.css"
             ],
             "scripts": []
           },
@@ -52,7 +52,13 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

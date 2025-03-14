@@ -12,19 +12,13 @@ import { map, catchError } from 'rxjs/operators';
 })
 
 export class AuthService {
-  private baseUrl: string = 'http://127.0.0.1:8000/api/auth/';
-  private endpointRegistration: string = 'registration/';
-
 
   constructor(private restClient: RestClientService) { }
 
 
   createUserAccount(data: UserRegistration): Observable<any> {
-    const url: string = this.baseUrl + this.endpointRegistration;
-    return this.restClient.postRegistrationData(url, data).pipe(
+    return this.restClient.postRegistrationData(data).pipe(
       map(response => {
-        console.log(response.data);
-        
         if (response.successfully) {
           return 'Registrierung erfolgreich.';
         } else {
@@ -57,7 +51,7 @@ export class AuthService {
     }
     return errorMessages.join('\n');
   }
-  
+
 
 
 
