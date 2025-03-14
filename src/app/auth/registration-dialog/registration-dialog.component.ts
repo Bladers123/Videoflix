@@ -49,14 +49,14 @@ export class RegistrationDialogComponent {
       phone: this.phone,
     };
 
+    this.isRegistered = true;
+
     this.authService.createUserAccount(data).subscribe({
       next: async (message) => {
-        this.isRegistered = true;
         await this.toastComponent.showRegisterSuccessfully(message);
         this.closeDialog();
       },
       error: async (error) => {
-        this.isRegistered = true;
         setTimeout(() => {
           this.isRegistered = false;
         }, 2000);

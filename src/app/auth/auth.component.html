@@ -1,27 +1,41 @@
 <!-- auth.component.html -->
 <div class="flex justify-content-center align-items-center h-screen background-of-profile-selection">
-    <div class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-55vh gap-5 border-round">
+    <div
+        class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-55vh gap-5 border-round">
         <span class="text-5xl w-9">Einloggen</span>
+
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel" [(ngModel)]="email"
-                autocomplete="on" [ngClass]="{'p-filled': email}" />
-            <label class="w-full" for="email-input">E-Mail-Adresse</label>
-        </p-floatlabel>
-        <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="password"
-                autocomplete="on" [ngClass]="{'p-filled': password}" />
-            <label class="w-full" for="password-input">Passwort</label>
-        </p-floatlabel>
-        <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer">Einloggen</button>
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel" [(ngModel)]="rememberUserData.email"
+                autocomplete="on" [ngClass]="{'p-filled': rememberUserData.email}" />
+            <label for="email-input">E-Mail-Adresse</label>
+          </p-floatlabel>
+          
+          <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label" [(ngModel)]="rememberUserData.password"
+                autocomplete="on" [ngClass]="{'p-filled': rememberUserData.password}" />
+            <label for="password-input">Passwort</label>
+          </p-floatlabel>
+          
+
+        <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer" [disabled]="isLogged"
+            (click)="login()">Einloggen</button>
         <a href="#" class="text-white text-lg">Passwort vergessen?</a>
+
+
         <form class="flex items-center gap-1 w-9">
-            <p-checkbox value="" inputId="user-data" />
-            <label for="user-data" class="ml-2 text-lg">Benutzerdaten merken</label>
-        </form>
+              <p-checkbox inputId="user-data" [(ngModel)]="rememberUserData.remember" (onChange)="saveRememberDataInLocalStorage($event.checked)" name="rememberUserData" [binary]="true"></p-checkbox>
+              <label for="user-data" class="ml-2 text-lg">Benutzerdaten merken</label>
+          </form>
+          
+
+
         <span class="w-9 text-lg">Neu bei Netflix?
             <a (click)="openRegistrationDialog()" href="#" class="text-white text-lg">Jetzt registrieren.</a>
         </span>
     </div>
 </div>
 
-<app-registration-dialog *ngIf="registrationDialogVisible" (close)="closeRegistrationDialog()"></app-registration-dialog>
+<app-registration-dialog *ngIf="registrationDialogVisible"
+    (close)="closeRegistrationDialog()"></app-registration-dialog>
+
+<app-toast></app-toast>

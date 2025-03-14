@@ -1,5 +1,5 @@
 // auth.component.ts
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -13,35 +13,48 @@ import { ToastComponent } from '../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-auth',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, CheckboxModule, RegistrationDialogComponent, ToastComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
 
 
-export class AuthComponent {
+export class AuthComponent implements OnInit {
 
   @ViewChild(RegistrationDialogComponent) registrationDialog!: RegistrationDialogComponent;
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
-
-  email: string = '';
-  password: string = '';
-
-
-
   registrationDialogVisible: boolean = false;
 
+  isLogged: boolean = false;
 
-  // Fehlertext für die Anzeige von Login-Fehlern
-  errorMessage: string = '';
+  rememberUserData: any = {
+    email: '',
+    password: '',
+    remember: false
+  };
 
-  // Optional: Statusindikator, ob gerade eingeloggt wird
-  isLoading: boolean = false;
 
   constructor(private authService: AuthService) { }
 
+  ngOnInit() {
+    this.loadRemeberDataFromLocalStorage();
+  }
 
+
+  loadRemeberDataFromLocalStorage() {
+    const storedData = localStorage.getItem('rememberUserData');
+    if (storedData)
+      this.rememberUserData = JSON.parse(storedData);
+  }
+
+  saveRememberDataInLocalStorage(remeber: boolean) {
+    this.rememberUserData.remember = remeber;
+    if (this.rememberUserData.remember)
+      localStorage.setItem('rememberUserData', JSON.stringify(this.rememberUserData));
+    else
+      localStorage.removeItem('rememberUserData');
+  }
 
 
   openRegistrationDialog() {
@@ -51,17 +64,45 @@ export class AuthComponent {
   closeRegistrationDialog() {
     this.registrationDialogVisible = false;
   }
+  
 
+  login() {
+    const data = {
+      email: this.rememberUserData.email,
+      password: this.rememberUserData.password,
+    };
 
+    this.isLogged = true;
 
-
-
-  login(): void {
-    // Logik für die Login-Funktion
-    // Prüfen, ob beide Felder ausgefüllt sind
-    if (false) {
-      this.errorMessage = 'Bitte E-Mail und Passwort eingeben.';
-      return;
-    }
+    this.authService.loginUser(data).subscribe({
+      next: async (message) => {
+        await this.toastComponent.showLoginSuccessfully(message);
+      },
+      error: async (error) => {
+        setTimeout(() => {
+          this.isLogged = false;
+        }, 2000);
+        await this.toastComponent.showLoginError(error);
+      }
+    });
   }
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

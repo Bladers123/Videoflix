@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserRegistration } from '../interfaces/register.interface';
 import { environment } from '../../../environments/environment';
+import { UserLogin } from '../interfaces/login.interface';
 
 
 
@@ -16,7 +17,13 @@ export class RestClientService {
 
   constructor(private httpClient: HttpClient) { }
 
+  
+
   postRegistrationData(data: UserRegistration): Observable<any> {
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_REGISTRATION, data);
+  }
+
+  postLoginData(data: UserLogin): Observable<any> {
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_LOGIN, data);
   }
 }

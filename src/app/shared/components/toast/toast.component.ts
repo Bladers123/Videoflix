@@ -51,4 +51,24 @@ export class ToastComponent {
   }
 
 
+  async showLoginSuccessfully(message: string = 'Erfolgreich!'){
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  
+  }
+
+
+  async showLoginError(message: string = 'Fehlgeschlagen!'){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
 }
