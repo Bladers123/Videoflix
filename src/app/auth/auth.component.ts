@@ -60,7 +60,9 @@ export class AuthComponent implements OnInit {
 
 
   openRegistrationDialog() {
-    this.registrationDialogVisible = true;
+    setTimeout(() => {
+      this.registrationDialogVisible = true;
+    });
   }
 
   closeRegistrationDialog() {
