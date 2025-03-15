@@ -21,17 +21,15 @@ export class AuthService {
   createUserAccount(data: UserRegistration): Observable<any> {
     return this.restClient.postRegistrationData(data).pipe(
       map(response => {
-        if (response.successfully) {
-          return 'Registrierung erfolgreich.';
-        } else {
+        if (response.successfully)
+          return response.message;
+        else
           return 'Registrierung fehlgeschlagen.';
-        }
       }),
       catchError(err => {
         let errorMsg = 'Registrierung fehlgeschlagen.';
-        if (err.error) {
+        if (err.error)
           errorMsg = this.extractErrorMessages(err.error);
-        }
         return throwError(errorMsg);
       })
     );
@@ -40,44 +38,38 @@ export class AuthService {
   loginUser(data: UserLogin): Observable<any> {
     return this.restClient.postLoginData(data).pipe(
       map(response => {
-        if (response.successfully) {
-          return 'Login erfolgreich.';
-        } else {
+        if (response.successfully)
+          return response.message;
+        else
           return 'Login fehlgeschlagen.';
-        }
       }),
       catchError(err => {
         let errorMsg = 'Login fehlgeschlagen.';
-        if (err.error) {
+        if (err.error)
           errorMsg = this.extractErrorMessages(err.error);
-        }
+
         return throwError(errorMsg);
       })
     );
   }
-
 
 
   requestRecoverPassword(data: RequestRecoverPassword) {
     return this.restClient.postRecoveryPasswordData(data).pipe(
       map(response => {
-        if (response.successfully) {
-          return response.data;
-        } else {
+        if (response.successfully)
+          return response.message;
+        else
           return 'E-Mail konnte nicht gesendet werden.';
-        }
       }),
       catchError(err => {
         let errorMsg = 'E-Mail konnte nicht gesendet werden.';
-        if (err.error) {
+        if (err.error)
           errorMsg = this.extractErrorMessages(err.error);
-        }
         return throwError(errorMsg);
       })
     );
   }
-
-
 
 
   private extractErrorMessages(errorResponse: any): string {

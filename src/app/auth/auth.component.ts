@@ -10,6 +10,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { RegistrationDialogComponent } from './registration-dialog/registration-dialog.component';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { RecoveryPasswordDialogComponent } from './recover-password-dialog/recover-password-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AuthComponent implements OnInit {
   };
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loadRemeberDataFromLocalStorage();
@@ -83,12 +84,11 @@ export class AuthComponent implements OnInit {
       email: this.rememberUserData.email,
       password: this.rememberUserData.password,
     };
-
     this.isLogged = true;
-
     this.authService.loginUser(data).subscribe({
       next: async (message) => {
         await this.toastComponent.showLoginSuccessfully(message);
+        this.router.navigate(['/home']);
       },
       error: async (error) => {
         setTimeout(() => {
@@ -100,7 +100,9 @@ export class AuthComponent implements OnInit {
   }
 
 
-
+  navigateToStartScreen() {
+    this.router.navigate(['/']);
+  }
 
 
 

@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
 })
 
 
-export class SplashScreenComponent implements OnInit {
-  
+export class SplashScreenComponent {
+
+
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.router.navigate(['/auth']);
-    }, 2000);
+  navigateToAuth() {
+    this.router.navigate(['/auth']);
   }
+
+
 }
