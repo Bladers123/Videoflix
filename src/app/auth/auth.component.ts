@@ -11,6 +11,7 @@ import { RegistrationDialogComponent } from './registration-dialog/registration-
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { RecoveryPasswordDialogComponent } from './recover-password-dialog/recover-password-dialog.component';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
   @ViewChild(RegistrationDialogComponent) registrationDialog!: RegistrationDialogComponent;
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
@@ -31,33 +32,13 @@ export class AuthComponent implements OnInit {
 
   isLogged: boolean = false;
 
-  rememberUserData: any = {
+  loggingData: any = {
     email: '',
     password: '',
-    remember: false
   };
 
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-    this.loadRemeberDataFromLocalStorage();
-  }
-
-
-  loadRemeberDataFromLocalStorage() {
-    const storedData = localStorage.getItem('rememberUserData');
-    if (storedData)
-      this.rememberUserData = JSON.parse(storedData);
-  }
-
-  saveRememberDataInLocalStorage(remeber: boolean) {
-    this.rememberUserData.remember = remeber;
-    if (this.rememberUserData.remember)
-      localStorage.setItem('rememberUserData', JSON.stringify(this.rememberUserData));
-    else
-      localStorage.removeItem('rememberUserData');
-  }
+  constructor(private authService: AuthService, private router: Router, private localStorageService: LocalStorageService) { }
 
 
   openRegistrationDialog() {
@@ -81,14 +62,14 @@ export class AuthComponent implements OnInit {
 
   login() {
     const data = {
-      email: this.rememberUserData.email,
-      password: this.rememberUserData.password,
+      email: this.loggingData.email,
+      password: this.loggingData.password,
     };
     this.isLogged = true;
     this.authService.loginUser(data).subscribe({
       next: async (message) => {
         await this.toastComponent.showLoginSuccessfully(message);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile-selection']);
       },
       error: async (error) => {
         setTimeout(() => {
@@ -98,14 +79,6 @@ export class AuthComponent implements OnInit {
       }
     });
   }
-
-
-  navigateToStartScreen() {
-    this.router.navigate(['/']);
-  }
-
-
-
 }
 
 

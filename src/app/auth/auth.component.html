@@ -6,30 +6,23 @@
 
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel"
-                [(ngModel)]="rememberUserData.email" autocomplete="on"
-                [ngClass]="{'p-filled': rememberUserData.email}" />
-
+                [(ngModel)]="loggingData.email" autocomplete="username" [ngClass]="{'p-filled': loggingData.email}" />
             <label for="email-input">E-Mail-Adresse</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-9" variant="in">
             <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label"
-                [(ngModel)]="rememberUserData.password" autocomplete="on"
-                [ngClass]="{'p-filled': rememberUserData.password}" />
+                [(ngModel)]="loggingData.password" autocomplete="current-password"
+                [ngClass]="{'p-filled': loggingData.password}" />
             <label for="password-input">Passwort</label>
         </p-floatlabel>
 
         <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400"
             [disabled]="isLogged" (click)="login()">Einloggen</button>
+
+
         <a (click)="openRecoverPasswordDialog()" class="text-white text-lg cursor-pointer underline">Passwort
             vergessen?</a>
-
-        <form class="flex items-center gap-1 w-9">
-            <p-checkbox inputId="user-data" [(ngModel)]="rememberUserData.remember"
-                (onChange)="saveRememberDataInLocalStorage($event.checked)" name="rememberUserData"
-                [binary]="true"></p-checkbox>
-            <label for="user-data" class="ml-2 text-lg">Benutzerdaten merken</label>
-        </form>
 
         <span class="w-9 text-lg">Neu bei Netflix?
             <a (click)="openRegistrationDialog()" class="text-white text-lg cursor-pointer underline">Jetzt
@@ -46,5 +39,3 @@
     (close)="closeRecoverPasswordDialog()"></app-recover-password-dialog>
 
 <app-toast></app-toast>
-
-<img (click)="navigateToStartScreen()" class="w-10rem absolute top-0 left-0 cursor-pointer" src="img/logo.png" alt="logo">

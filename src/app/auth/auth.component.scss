@@ -25,15 +25,3 @@
 .p-floatlabel:has(.p-inputwrapper-focus) label {
     color: inherit !important;
 }
-
-// entfernt Farbe von der Checkbox
-::ng-deep {
-    :root {
-        --p-checkbox-checked-background: transparent;
-        --p-checkbox-checked-hover-background: none;
-        --p-checkbox-checked-border-color: #808080;
-        --p-checkbox-checked-hover-border-color: #808080;
-        --p-checkbox-icon-checked-color: #808080;
-        --p-checkbox-icon-checked-hover-color: #808080;
-    }
-}

@@ -1,11 +1,12 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { RestClientService } from '../rest-client/rest-client.service';
+import { RestClientService } from './rest-client.service';
 import { UserRegistration } from '../interfaces/register.interface';
 import { map, catchError } from 'rxjs/operators';
 import { UserLogin } from '../interfaces/login.interface';
 import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
+import { LocalStorageService } from './local-storage.service';
 
 
 
@@ -15,7 +16,7 @@ import { RequestRecoverPassword } from '../interfaces/request-recovery-password.
 
 export class AuthService {
 
-  constructor(private restClient: RestClientService) { }
+  constructor(private restClient: RestClientService, private localStorageService: LocalStorageService) { }
 
 
   createUserAccount(data: UserRegistration): Observable<any> {
@@ -38,8 +39,10 @@ export class AuthService {
   loginUser(data: UserLogin): Observable<any> {
     return this.restClient.postLoginData(data).pipe(
       map(response => {
-        if (response.successfully)
+        if (response.successfully) {
+          this.localStorageService.setItem('user', response);
           return response.message;
+        }
         else
           return 'Login fehlgeschlagen.';
       }),
@@ -86,7 +89,9 @@ export class AuthService {
   }
 
 
-
+async saveDataInLocalStorage(key: string, data: any) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
 
 
 

@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
     { path: '', component: SplashScreenComponent },
-    { path: 'auth', component: AuthComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'auth', component: AuthComponent }, 
     { path: 'profile-selection', component: ProfileSelectionComponent },
+    { path: 'home', component: HomeComponent },
 ];
