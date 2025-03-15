@@ -1,5 +1,5 @@
 // rest-client.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserRegistration } from '../interfaces/register.interface';
@@ -32,6 +32,12 @@ export class RestClientService {
      return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_RECOVERY_PASSWORD, data);
   }
 
-
+  getVerifyUserByToken(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Token ' + token
+    });
+    return this.httpClient.get(environment.BASE_URL + 'auth/verify/', { headers });
+  }
+  
 
 }

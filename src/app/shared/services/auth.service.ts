@@ -1,12 +1,13 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { RestClientService } from './rest-client.service';
 import { UserRegistration } from '../interfaces/register.interface';
 import { map, catchError } from 'rxjs/operators';
 import { UserLogin } from '../interfaces/login.interface';
 import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
 import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,7 +17,7 @@ import { LocalStorageService } from './local-storage.service';
 
 export class AuthService {
 
-  constructor(private restClient: RestClientService, private localStorageService: LocalStorageService) { }
+  constructor(private restClient: RestClientService, private localStorageService: LocalStorageService, private router: Router) { }
 
 
   createUserAccount(data: UserRegistration): Observable<any> {
@@ -75,6 +76,32 @@ export class AuthService {
   }
 
 
+  verifyUser(): void {
+    const user: any = this.localStorageService.getItem('user');
+    if (!user || !user.token) {
+      this.router.navigate(['/auth']);
+      return;
+    }
+
+    this.restClient.getVerifyUserByToken(user.token).pipe(
+      map(response => response.exists || false),
+      catchError(err => {
+        let errorMsg = 'Verifizierung fehlgeschlagen.';
+        if (err.error) {
+          errorMsg = this.extractErrorMessages(err.error);
+        }
+
+        return of(false);
+      })
+    ).subscribe((exists: boolean) => {
+      if (!exists) {
+        this.router.navigate(['/auth']);
+      }
+    });
+  }
+
+
+
   private extractErrorMessages(errorResponse: any): string {
     let errorMessages: string[] = [];
     for (const field in errorResponse) {
@@ -87,12 +114,6 @@ export class AuthService {
     }
     return errorMessages.join('\n');
   }
-
-
-async saveDataInLocalStorage(key: string, data: any) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
-
 
 
 
