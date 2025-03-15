@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 
 export class SplashScreenComponent implements OnInit {
+  
   constructor(private router: Router) { }
 
   ngOnInit(): void {
