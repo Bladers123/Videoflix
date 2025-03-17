@@ -6,6 +6,9 @@ import { UserRegistration } from '../interfaces/register.interface';
 import { environment } from '../../../environments/environment';
 import { UserLogin } from '../interfaces/login.interface';
 import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
+import { AuthService } from './auth.service';
+import { LocalStorageService } from './local-storage.service';
+import { User } from '../interfaces/user.interface';
 
 
 
@@ -16,8 +19,18 @@ import { RequestRecoverPassword } from '../interfaces/request-recovery-password.
 
 export class RestClientService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) { }
 
+  private getAuthorizationTokenHeader(): HttpHeaders {
+    const user: User | null = this.localStorage.getItem('user');
+    if (user) {
+      return new HttpHeaders({
+        'Authorization': 'Token ' + user.token
+      });
+    }
+    return new HttpHeaders();
+  }
+  
 
 
   postRegistrationData(data: UserRegistration): Observable<any> {
@@ -28,16 +41,41 @@ export class RestClientService {
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_LOGIN, data);
   }
 
-  postRecoveryPasswordData(data: RequestRecoverPassword): Observable<any> {    
-     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_RECOVERY_PASSWORD, data);
+  postRecoveryPasswordData(data: RequestRecoverPassword): Observable<any> {
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_RECOVERY_PASSWORD, data);
   }
 
-  getVerifyUserByToken(token: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Token ' + token
-    });
-    return this.httpClient.get(environment.BASE_URL + 'auth/verify/', { headers });
+  getVerifyUser(): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_VERIFY, { headers });
   }
+
+
   
+
+
+  getProfile(): Observable<any> {
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_PROFILE);
+  }
+
+  postProfile(): Observable<any> {
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_PROFILE, {});
+  }
+
+  putProfile(data: any): Observable<any> {
+    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE, data);
+  }
+
+  getSubProfile(): Observable<any> {
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE);
+  }
+
+  postSubProfile(data: any): Observable<any> {
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, data);
+  }
+
+  putSubProfile(subProfileId: string, data: any): Observable<any> {
+    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + '/' + subProfileId, data);
+  }
 
 }

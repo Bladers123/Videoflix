@@ -8,6 +8,7 @@ import { UserLogin } from '../interfaces/login.interface';
 import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
+import { User } from '../interfaces/user.interface';
 
 
 
@@ -17,11 +18,14 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  constructor(private restClient: RestClientService, private localStorageService: LocalStorageService, private router: Router) { }
+  user: User | undefined;
+
+  constructor(private restClientService: RestClientService, private localStorageService: LocalStorageService, private router: Router) { }
+
 
 
   createUserAccount(data: UserRegistration): Observable<any> {
-    return this.restClient.postRegistrationData(data).pipe(
+    return this.restClientService.postRegistrationData(data).pipe(
       map(response => {
         if (response.successfully)
           return response.message;
@@ -38,7 +42,7 @@ export class AuthService {
   }
 
   loginUser(data: UserLogin): Observable<any> {
-    return this.restClient.postLoginData(data).pipe(
+    return this.restClientService.postLoginData(data).pipe(
       map(response => {
         if (response.successfully) {
           this.localStorageService.setItem('user', response);
@@ -59,7 +63,7 @@ export class AuthService {
 
 
   requestRecoverPassword(data: RequestRecoverPassword) {
-    return this.restClient.postRecoveryPasswordData(data).pipe(
+    return this.restClientService.postRecoveryPasswordData(data).pipe(
       map(response => {
         if (response.successfully)
           return response.message;
@@ -78,12 +82,13 @@ export class AuthService {
 
   verifyUser(): void {
     const user: any = this.localStorageService.getItem('user');
-    if (!user || !user.token) {
+    if (!user) {
       this.router.navigate(['/auth']);
       return;
     }
 
-    this.restClient.getVerifyUserByToken(user.token).pipe(
+    this.user = user;
+    this.restClientService.getVerifyUser().pipe(
       map(response => response.exists || false),
       catchError(err => {
         let errorMsg = 'Verifizierung fehlgeschlagen.';
