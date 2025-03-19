@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { RestClientService } from "./rest-client.service";
 import { catchError, map, Observable, throwError } from "rxjs";
-import { Profile } from "../interfaces/profile.interface";
 import { SubProfile } from "../interfaces/sub-profile.interace";
 
 @Injectable({
@@ -9,33 +8,34 @@ import { SubProfile } from "../interfaces/sub-profile.interace";
 })
 
 
-export class ProfileService {
+export class SubProfileService {
+
   constructor(private restClientService: RestClientService) { }
 
 
-  getProfileData(): Observable<any> {
-    return this.restClientService.getProfile().pipe(
-      map(response => {
+  createSubProfile(data: any): Observable<any> {
+    return this.restClientService.postSubProfile(data);
+  }
+
+  getSubProfileData(): Observable<SubProfile[]> {
+    return this.restClientService.getSubProfile().pipe(
+      map((response: any) => {
         if (response)
-          return response;
+          return response; 
       }),
       catchError(err => {
-        let errorMsg = '';
-        errorMsg = this.extractErrorMessages(err.error);
-        return throwError(errorMsg);
+        return throwError(() => new Error('Fehler beim Abrufen der Subprofile.'));
       })
     );
   }
 
-  deleteProfile(): Observable<any> {
-    return this.restClientService.postProfile();
+  deleteSubProfile(subProfileId: string): Observable<any> {
+    return this.restClientService.postSubProfile(subProfileId);
   }
 
-  updateProfile(data: any): Observable<any> {
-    return this.restClientService.putProfile(data);
+  updateSubProfile(subProfileId: string, data: any): Observable<any> {
+    return this.restClientService.putSubProfile(subProfileId, data);
   }
-
-
 
   private extractErrorMessages(errorResponse: any): string {
     let errorMessages: string[] = [];

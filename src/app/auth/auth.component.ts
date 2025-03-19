@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { IftaLabelModule } from 'primeng/iftalabel';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';

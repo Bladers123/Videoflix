@@ -67,7 +67,8 @@ export class RestClientService {
   }
 
   getSubProfile(): Observable<any> {
-    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE);
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, { headers });
   }
 
   postSubProfile(data: any): Observable<any> {

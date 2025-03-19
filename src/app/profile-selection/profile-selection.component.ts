@@ -1,30 +1,46 @@
 // profile-Selection.component
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { ProfileService } from '../shared/services/profile.service';
+import { SubProfile } from '../shared/interfaces/sub-profile.interace';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ToastComponent } from '../shared/components/toast/toast.component';
+import { SubProfileService } from '../shared/services/sub-profile.service';
+import { AddSubProfileDialogComponent } from "./add-sub-profile-dialog/add-sub-profile-dialog.component";
+import { ManageSubProfileDialogComponent } from "./manage-sub-profile-dialog/manage-sub-profile-dialog.component";
 
 
 @Component({
   selector: 'app-profile-selection',
-  imports: [],
+  imports: [FormsModule, CommonModule, AddSubProfileDialogComponent, ManageSubProfileDialogComponent],
   templateUrl: './profile-selection.component.html',
   styleUrl: './profile-selection.component.scss'
 })
+
+
 export class ProfileSelectionComponent implements OnInit {
 
+  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
-  constructor(private authService: AuthService, private profileService: ProfileService) { }
+
+  addSubProfileDialogVisible: boolean = false;
+  manageSubProfileDialogVisible: boolean = false;
+
+
+  subProfiles: SubProfile[] = [];
+
+  constructor(private authService: AuthService, private profileService: ProfileService, private subProfileService: SubProfileService) { }
 
   ngOnInit() {
     this.authService.verifyUser();
-    // this.loadSubProfiles();
+    this.loadSubProfiles();
   }
 
   loadSubProfiles() {
-    this.profileService.getSubProfileData().subscribe({
-      next: (response: any) => {
-        console.log('Geladene Subprofile:', response);
-        // Hier kannst du die Subprofile in einer Komponente-Variable speichern
+    this.subProfileService.getSubProfileData().subscribe({
+      next: (subProfiles: SubProfile[]) => {
+        this.subProfiles = subProfiles;
       },
       error: err => {
         console.error('Fehler beim Laden der Subprofile', err);
@@ -42,9 +58,9 @@ export class ProfileSelectionComponent implements OnInit {
         console.error('Fehler beim Laden der Profile', err);
       }
     });
-}
+  }
 
-deleteProfile() {
+  deleteProfile() {
     this.profileService.deleteProfile().subscribe({
       next: response => {
         console.log('Profil gelöscht:', response);
@@ -78,7 +94,7 @@ deleteProfile() {
       // Hier die Daten für das Subprofil einfügen
     };
 
-    this.profileService.createSubProfile(subProfileData).subscribe({
+    this.subProfileService.createSubProfile(subProfileData).subscribe({
       next: response => {
         console.log('Subprofil erstellt:', response);
         // Subprofile neu laden, falls erforderlich
@@ -88,11 +104,11 @@ deleteProfile() {
         console.error('Fehler beim Erstellen des Subprofils', err);
       }
     });
-  
+
   }
 
   getSubProfileData() {
-    this.profileService.getSubProfileData().subscribe({
+    this.subProfileService.getSubProfileData().subscribe({
       next: (response: any) => {
         console.log('Geladene Subprofile:', response);
         // Hier kannst du die Subprofile in einer Komponente-Variable speichern
@@ -104,7 +120,7 @@ deleteProfile() {
   }
 
   deleteSubProfile(subProfileId: string) {
-    this.profileService.deleteSubProfile(subProfileId).subscribe({
+    this.subProfileService.deleteSubProfile(subProfileId).subscribe({
       next: response => {
         console.log('Subprofil gelöscht:', response);
         // Subprofile neu laden, falls erforderlich
@@ -114,14 +130,14 @@ deleteProfile() {
         console.error('Fehler beim Löschen des Subprofils', err);
       }
     });
-  }	
+  }
 
- updateSubProfileData(subProfileId: string) {
+  updateSubProfileData(subProfileId: string) {
     const subProfileData = {
       // Hier die Daten für das Subprofil einfügen
     };
 
-    this.profileService.updateSubProfile(subProfileId, subProfileData).subscribe({
+    this.subProfileService.updateSubProfile(subProfileId, subProfileData).subscribe({
       next: response => {
         console.log('Subprofil aktualisiert:', response);
         // Subprofile neu laden, falls erforderlich
@@ -131,6 +147,22 @@ deleteProfile() {
         console.error('Fehler beim Aktualisieren des Subprofils', err);
       }
     });
+  }
+
+  openAddSubProfileDialog() {
+    this.addSubProfileDialogVisible = true;
+  }
+
+  closeAddSubProfileDialog() {
+    this.addSubProfileDialogVisible = false;
+  }
+
+  openManageSubProfileDialog() {
+    this.manageSubProfileDialogVisible = true;
+  }
+
+  closeManageSubProfileDialog() {
+    this.manageSubProfileDialogVisible = false;
   }
 
 

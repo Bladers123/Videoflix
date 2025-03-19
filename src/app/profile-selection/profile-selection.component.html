@@ -1,21 +1,23 @@
 <div class="flex justify-content-center align-items-center flex-column h-screen">
     <label class="text-6xl">Wer schaut gerade?</label>
     <div class="flex align-items-center justify-content-around w-full mt-8">
-        <div class="flex flex-column align-items-center cursor-pointer">
+        <div *ngFor="let subProfile of subProfiles" class="flex flex-column align-items-center cursor-pointer">
             <div class="p-8 bg-blue-700 border-round"></div>
-            <Label class="mt-3 text-3xl">Tristan</Label>
-        </div>
-        <div class="flex flex-column align-items-center cursor-pointer">
-            <div class="p-8 bg-yellow-400 border-round"></div>
-            <Label class="mt-3 text-3xl">Andreas</Label>
-        </div>
-        <div class="flex flex-column align-items-center cursor-pointer">
-            <div class="p-8 bg-red-500 border-round"></div>
-            <Label class="mt-3 text-3xl">Sandra</Label>
+            <label class="mt-3 text-3xl">{{ subProfile.name }}</label>
         </div>
     </div>
-    <div (click)="createSubProfile()" class="flex flex-column align-items-center cursor-pointer mt-8">
-        <div class="p-8 bg-white border-circle"></div>
-        <Label class="mt-3 text-3xl">Profil hinzufügen</Label>
+    <div class="flex justify-content-center align-items-center w-full">
+        <div (click)="openAddSubProfileDialog()" class="flex flex-column align-items-center cursor-pointer mt-8 p-5">
+            <div class="p-8 bg-green-700 border-circle"></div>
+            <label class="mt-3 text-3xl">Profil hinzufügen</label>
+        </div>
+        <div (click)="openManageSubProfileDialog()" class="flex flex-column align-items-center cursor-pointer mt-8 p-5">
+            <div class="p-8 bg-yellow-400 border-circle"></div>
+            <label class="mt-3 text-3xl">Profil Verwalten</label>
+        </div>
     </div>
 </div>
+
+
+<app-add-sub-profile-dialog *ngIf="addSubProfileDialogVisible" (close)="closeAddSubProfileDialog()"></app-add-sub-profile-dialog>
+<app-manage-sub-profile-dialog *ngIf="manageSubProfileDialogVisible" (close)="closeManageSubProfileDialog()"></app-manage-sub-profile-dialog>
