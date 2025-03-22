@@ -46,6 +46,7 @@ export class AuthService {
       map(response => {
         if (response.successfully) {
           this.localStorageService.setItem('user', response);
+          this.user = response;
           return response.message;
         }
         else
@@ -80,30 +81,29 @@ export class AuthService {
   }
 
 
-  verifyUser(): void {
-    const user: any = this.localStorageService.getItem('user');
+  verifyUser(): Observable<boolean> {
+    const user: User | null = this.localStorageService.getItem('user');    
     if (!user) {
       this.router.navigate(['/auth']);
-      return;
+      return of(false);
     }
-
+  
     this.user = user;
-    this.restClientService.getVerifyUser().pipe(
-      map(response => response.exists || false),
-      catchError(err => {
-        let errorMsg = 'Verifizierung fehlgeschlagen.';
-        if (err.error) {
-          errorMsg = this.extractErrorMessages(err.error);
+    return this.restClientService.getVerifyUser().pipe(
+      map(response => {
+        const exists = response.exists || false;
+        if (!exists) {
+          this.router.navigate(['/auth']);
         }
-
+        return exists;
+      }),
+      catchError(err => {
+        this.router.navigate(['/auth']);
         return of(false);
       })
-    ).subscribe((exists: boolean) => {
-      if (!exists) {
-        this.router.navigate(['/auth']);
-      }
-    });
+    );
   }
+  
 
 
 

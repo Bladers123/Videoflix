@@ -13,29 +13,32 @@ export class SubProfileService {
   constructor(private restClientService: RestClientService) { }
 
 
-  createSubProfile(data: any): Observable<any> {
-    return this.restClientService.postSubProfile(data);
+  addSubProfile(data: SubProfile): Observable<any> {
+    return this.restClientService.postSubProfile(data).pipe(
+      map((response: any) => {
+        if (response)          
+          return response;
+      }),
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    )
   }
 
   getSubProfileData(): Observable<SubProfile[]> {
     return this.restClientService.getSubProfile().pipe(
       map((response: any) => {
         if (response)
-          return response; 
+          return response;
       }),
       catchError(err => {
-        return throwError(() => new Error('Fehler beim Abrufen der Subprofile.'));
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
       })
     );
   }
 
-  deleteSubProfile(subProfileId: string): Observable<any> {
-    return this.restClientService.postSubProfile(subProfileId);
-  }
-
-  updateSubProfile(subProfileId: string, data: any): Observable<any> {
-    return this.restClientService.putSubProfile(subProfileId, data);
-  }
 
   private extractErrorMessages(errorResponse: any): string {
     let errorMessages: string[] = [];

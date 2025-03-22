@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { ToastComponent } from '../../shared/components/toast/toast.component';
 import { SubProfileService } from '../../shared/services/sub-profile.service';
+import { ProfileService } from '../../shared/services/profile.service';
+import { SubProfile } from '../../shared/interfaces/sub-profile.interace';
+import { Profile } from '../../shared/interfaces/profile.interface';
 
 
 
@@ -16,31 +19,42 @@ import { SubProfileService } from '../../shared/services/sub-profile.service';
   templateUrl: './add-sub-profile-dialog.component.html',
   styleUrl: './add-sub-profile-dialog.component.scss'
 })
+
+
 export class AddSubProfileDialogComponent {
- @ViewChild(ToastComponent) toastComponent!: ToastComponent;
+
+  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
   @Output() close = new EventEmitter<void>();
+  @Output() subProfileAdded = new EventEmitter<void>();
+
 
   isSending: boolean = false;
-
-
   name: string = '';
+  currentProfile: Profile | null = null;
 
 
+  constructor(private subProfileService: SubProfileService, private profileService: ProfileService) { }
 
-  constructor(private subProfileService: SubProfileService) { }
+  ngOnInit() {
+    this.profileService.profile$.subscribe(profile => {
+      this.currentProfile = profile;
+    });
+  }
 
 
-
-  createSubProfile() {
-    if (this.name !== '') {
+  addSubProfile() {   
+    const profileId = this.currentProfile?.id;
+    if (this.name !== '' && profileId) {
+      const data: SubProfile = { name: this.name, profile: profileId };
       this.isSending = true;
-      this.subProfileService.createSubProfile(this.name).subscribe({
-        next: async (message) => {
-          await this.toastComponent.showRequestRecoveryPasswordSuccessfully(message);
+      this.subProfileService.addSubProfile(data).subscribe({
+        next: async (response) => {
+          this.subProfileAdded.emit();
+          // await this.toastComponent.showRequestRecoveryPasswordSuccessfully(message);
           this.closeDialog();
         },
         error: async (error) => {
-          setTimeout(() => { 
+          setTimeout(() => {
             this.isSending = false;
           }, 2000);
           await this.toastComponent.showRequestRecoveryPasswordError(error);
@@ -48,6 +62,7 @@ export class AddSubProfileDialogComponent {
       });
     }
   }
+
 
 
   closeDialog() {

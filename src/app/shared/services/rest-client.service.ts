@@ -9,6 +9,7 @@ import { RequestRecoverPassword } from '../interfaces/request-recovery-password.
 import { AuthService } from './auth.service';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../interfaces/user.interface';
+import { SubProfile } from '../interfaces/sub-profile.interace';
 
 
 
@@ -30,7 +31,7 @@ export class RestClientService {
     }
     return new HttpHeaders();
   }
-  
+
 
 
   postRegistrationData(data: UserRegistration): Observable<any> {
@@ -51,12 +52,26 @@ export class RestClientService {
   }
 
 
+
+
+
+  getProfileById(id: string): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_PROFILE + id, { headers });
+  }
+
+
   
 
-
-  getProfile(): Observable<any> {
-    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_PROFILE);
+  postSubProfile(data: SubProfile): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, data, { headers });
   }
+
+
+
+
+
 
   postProfile(): Observable<any> {
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_PROFILE, {});
@@ -69,10 +84,6 @@ export class RestClientService {
   getSubProfile(): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, { headers });
-  }
-
-  postSubProfile(data: any): Observable<any> {
-    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, data);
   }
 
   putSubProfile(subProfileId: string, data: any): Observable<any> {

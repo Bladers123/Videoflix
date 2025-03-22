@@ -1,7 +1,7 @@
 import { Profile } from "./profile.interface";
 
 export interface SubProfile{
-    profile: Profile
+    id?: string
+    profile: string
     name: string
-    img: string
 }

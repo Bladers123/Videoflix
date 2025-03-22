@@ -19,5 +19,5 @@
 </div>
 
 
-<app-add-sub-profile-dialog *ngIf="addSubProfileDialogVisible" (close)="closeAddSubProfileDialog()"></app-add-sub-profile-dialog>
+<app-add-sub-profile-dialog *ngIf="addSubProfileDialogVisible" (close)="closeAddSubProfileDialog()" (subProfileAdded)="onSubProfileAdded()"></app-add-sub-profile-dialog>
 <app-manage-sub-profile-dialog *ngIf="manageSubProfileDialogVisible" (close)="closeManageSubProfileDialog()"></app-manage-sub-profile-dialog>

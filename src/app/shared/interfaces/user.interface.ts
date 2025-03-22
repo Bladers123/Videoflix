@@ -3,6 +3,7 @@ export interface User {
     message: string
     successfully: boolean
     token: string
-    user_id: string
+    id: string
     username: string
+    profile: string
 }

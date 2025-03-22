@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { RestClientService } from "./rest-client.service";
-import { catchError, map, Observable, throwError } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
 import { Profile } from "../interfaces/profile.interface";
 import { SubProfile } from "../interfaces/sub-profile.interace";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,32 +11,24 @@ import { SubProfile } from "../interfaces/sub-profile.interace";
 
 
 export class ProfileService {
+
+  private profileSubject = new BehaviorSubject<Profile | null>(null);
+  profile$ = this.profileSubject.asObservable();
+
+
   constructor(private restClientService: RestClientService) { }
 
 
-  getProfileData(): Observable<any> {
-    return this.restClientService.getProfile().pipe(
-      map(response => {
-        if (response)
-          return response;
-      }),
+  getProfileById(id: string): Observable<Profile | null> {    
+    return this.restClientService.getProfileById(id).pipe(
+      tap(profile => this.profileSubject.next(profile)),
       catchError(err => {
-        let errorMsg = '';
-        errorMsg = this.extractErrorMessages(err.error);
-        return throwError(errorMsg);
+        console.error('Fehler beim Laden des Profils', err);
+        return throwError(err);
       })
     );
-  }
-
-  deleteProfile(): Observable<any> {
-    return this.restClientService.postProfile();
-  }
-
-  updateProfile(data: any): Observable<any> {
-    return this.restClientService.putProfile(data);
-  }
-
-
+  }  
+  
 
   private extractErrorMessages(errorResponse: any): string {
     let errorMessages: string[] = [];
