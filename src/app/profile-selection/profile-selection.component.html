@@ -1,7 +1,7 @@
-<div class="flex justify-content-center align-items-center flex-column h-screen">
+<div class="top-level flex justify-content-center align-items-center flex-column h-screen">
     <label class="text-6xl">Wer schaut gerade?</label>
     <div class="flex align-items-center justify-content-around w-full mt-8">
-        <div *ngFor="let subProfile of subProfiles" class="flex flex-column align-items-center cursor-pointer">
+        <div (click)="navigateToHome()" *ngFor="let subProfile of subProfiles" class="flex flex-column align-items-center cursor-pointer">
             <div class="p-8 bg-blue-700 border-round"></div>
             <label class="mt-3 text-3xl">{{ subProfile.name }}</label>
         </div>

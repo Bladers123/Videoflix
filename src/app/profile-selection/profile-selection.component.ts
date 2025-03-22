@@ -90,7 +90,7 @@ export class ProfileSelectionComponent implements OnInit {
     this.loadSubProfiles();
   }
 
-  onSubProfileChanged(){
+  onSubProfileChanged() {
     this.loadProfile();
     this.loadSubProfiles();
   }
@@ -111,6 +111,9 @@ export class ProfileSelectionComponent implements OnInit {
     this.manageSubProfileDialogVisible = false;
   }
 
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
 
 }
 

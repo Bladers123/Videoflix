@@ -1,32 +1,35 @@
 <!-- auth.component.html -->
-<div class="flex justify-content-center align-items-center h-screen background-of-auth">
-    <div
-        class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-47vh gap-5 border-round">
-        <span class="text-5xl w-9">Einloggen</span>
+<div class="background-of-auth">
+    <div class="top-level flex justify-content-center align-items-center h-screen ">
+        <div
+            class="flex justify-content-center align-items-center flex-column w-5 background-of-card height-47vh gap-5 border-round">
+            <span class="text-5xl w-9 text-center">Einloggen</span>
 
-        <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel"
-                [(ngModel)]="loggingData.email" autocomplete="username" [ngClass]="{'p-filled': loggingData.email}" />
-            <label for="email-input">E-Mail-Adresse</label>
-        </p-floatlabel>
+            <p-floatlabel class="w-9" variant="in">
+                <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-ilabel"
+                    [(ngModel)]="loggingData.email" autocomplete="username"
+                    [ngClass]="{'p-filled': loggingData.email}" />
+                <label for="email-input">E-Mail-Adresse</label>
+            </p-floatlabel>
 
-        <p-floatlabel class="w-9" variant="in">
-            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label"
-                [(ngModel)]="loggingData.password" autocomplete="current-password"
-                [ngClass]="{'p-filled': loggingData.password}" />
-            <label for="password-input">Passwort</label>
-        </p-floatlabel>
+            <p-floatlabel class="w-9" variant="in">
+                <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="in_label"
+                    [(ngModel)]="loggingData.password" autocomplete="current-password"
+                    [ngClass]="{'p-filled': loggingData.password}" />
+                <label for="password-input">Passwort</label>
+            </p-floatlabel>
 
-        <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400"
-            [disabled]="isLogged" (click)="login()">Einloggen</button>
+            <button class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400"
+                [disabled]="isLogged" (click)="login()">Einloggen</button>
 
-        <a (click)="openRecoverPasswordDialog()" class="text-white text-lg cursor-pointer underline">Passwort
-            vergessen?</a>
+            <a (click)="openRecoverPasswordDialog()" class="text-white text-lg cursor-pointer underline">Passwort
+                vergessen?</a>
 
-        <span class="w-9 text-lg">Neu bei Netflix?
-            <a (click)="openRegistrationDialog()" class="text-white text-lg cursor-pointer underline">Jetzt
-                registrieren.</a>
-        </span>
+            <span class="w-9 text-lg text-center">Neu bei Netflix?
+                <a (click)="openRegistrationDialog()" class="text-white text-lg cursor-pointer underline">Jetzt
+                    registrieren.</a>
+            </span>
+        </div>
     </div>
 </div>
 
