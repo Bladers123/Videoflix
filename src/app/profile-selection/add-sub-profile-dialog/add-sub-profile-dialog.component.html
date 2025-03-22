@@ -4,16 +4,15 @@
         class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-6 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
         <span class="text-5xl">Profil hinzufügen</span>
-<span>
-   Tragen Sie bitte einen Namen ein.
-</span>
+        <span class="text-center">Tragen Sie bitte einen Namen ein.</span>
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="name"
                 autocomplete="on" [ngClass]="{'p-filled': name}" />
             <label class="w-full" for="email-input">*Name</label>
         </p-floatlabel>
 
-        <button [disabled]="isSending" (click)="addSubProfile()" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Hinzufügen</button>
+        <button [disabled]="isSending" (click)="addSubProfile()"
+            class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Hinzufügen</button>
     </div>
-   <app-toast></app-toast>
+    <app-toast></app-toast>
 </div>

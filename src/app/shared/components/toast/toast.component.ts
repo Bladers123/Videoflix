@@ -26,9 +26,8 @@ export class ToastComponent {
     return new Promise<void>((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 4000);
+      }, 2000);
     });
-
   }
 
   async showRegisterSuccessfully(message: string = 'Erfolgreich!') {
@@ -51,18 +50,18 @@ export class ToastComponent {
   }
 
 
-  async showLoginSuccessfully(message: string = 'Erfolgreich!'){
+  async showLoginSuccessfully(message: string = 'Erfolgreich!') {
     this.messageService.add({
       severity: 'success',
       summary: 'Erfolgreich',
       detail: message,
     });
     await this.waitOfPromise();
-  
+
   }
 
 
-  async showLoginError(message: string = 'Fehlgeschlagen!'){
+  async showLoginError(message: string = 'Fehlgeschlagen!') {
     this.messageService.add({
       severity: 'error',
       summary: 'Fehlgeschlagen',
@@ -72,19 +71,73 @@ export class ToastComponent {
   }
 
 
-  
-  async showRequestRecoveryPasswordSuccessfully(message: string = 'Erfolgreich!'){
+
+  async showRequestRecoveryPasswordSuccessfully(message: string = 'Erfolgreich!') {
     this.messageService.add({
       severity: 'success',
       summary: 'Erfolgreich',
       detail: message,
     });
     await this.waitOfPromise();
-  
   }
 
 
-  async showRequestRecoveryPasswordError(message: string = 'Fehlgeschlagen!'){
+  async showRequestRecoveryPasswordError(message: string = 'Fehlgeschlagen!') {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showCreateSubProfileSuccessfully(message: string = 'Erfolgreich erstellt!') {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showLoadingError(message: string = 'Laden fehlgeschlagen!') {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showUpdateSubProfileSuccessfully(message: string = 'Erfolgreich geändert!') {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showUpdateSubProfileError(message: string = 'Ändern fehlgeschlagen!') {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showDeleteSubProfileSuccessfully(message: string = 'Erfolgreich gelöscht!') {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  
+  async showDeleteSubProfileError(message: string = 'Löschen fehlgeschlagen !') {
     this.messageService.add({
       severity: 'error',
       summary: 'Fehlgeschlagen',

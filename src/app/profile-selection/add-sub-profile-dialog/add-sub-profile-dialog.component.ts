@@ -50,7 +50,7 @@ export class AddSubProfileDialogComponent {
       this.subProfileService.addSubProfile(data).subscribe({
         next: async (response) => {
           this.subProfileAdded.emit();
-          // await this.toastComponent.showRequestRecoveryPasswordSuccessfully(message);
+          await this.toastComponent.showCreateSubProfileSuccessfully(response.message);
           this.closeDialog();
         },
         error: async (error) => {

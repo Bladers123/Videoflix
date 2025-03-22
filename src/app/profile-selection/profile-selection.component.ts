@@ -65,11 +65,10 @@ export class ProfileSelectionComponent implements OnInit {
           next: (profile: Profile | null) => {
             if (profile) {
               this.profile = profile;
-              console.log("Profil neu geladen:", this.profile);
             }
           },
           error: err => {
-            console.error('Fehler beim Laden des Profils', err);
+            this.toastComponent.showLoginError(err);
           }
         });
     }
@@ -81,16 +80,20 @@ export class ProfileSelectionComponent implements OnInit {
         this.subProfiles = subProfiles;
       },
       error: err => {
-        console.error('Fehler beim Laden der Subprofile', err);
+        this.toastComponent.showLoginError(err);
       }
     });
   }
 
- onSubProfileAdded() {
+  onSubProfileAdded() {
     this.loadProfile();
     this.loadSubProfiles();
   }
-  
+
+  onSubProfileChanged(){
+    this.loadProfile();
+    this.loadSubProfiles();
+  }
 
   openAddSubProfileDialog() {
     this.addSubProfileDialogVisible = true;

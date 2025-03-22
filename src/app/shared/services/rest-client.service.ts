@@ -60,16 +60,25 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_PROFILE + id, { headers });
   }
 
-
-  
+  getAllSubProfiles(): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, { headers });
+  }
 
   postSubProfile(data: SubProfile): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, data, { headers });
   }
 
+  putSubProfile(subProfile: SubProfile): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subProfile.id + '/', subProfile, { headers });
+  }
 
-
+  deleteSubProfile(subProfile: SubProfile): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();    
+    return this.httpClient.delete(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subProfile.id + '/', { headers });
+  }
 
 
 
@@ -81,13 +90,8 @@ export class RestClientService {
     return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE, data);
   }
 
-  getSubProfile(): Observable<any> {
-    const headers = this.getAuthorizationTokenHeader();
-    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, { headers });
-  }
 
-  putSubProfile(subProfileId: string, data: any): Observable<any> {
-    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + '/' + subProfileId, data);
-  }
+
+
 
 }

@@ -13,11 +13,11 @@
         </div>
         <div (click)="openManageSubProfileDialog()" class="flex flex-column align-items-center cursor-pointer mt-8 p-5">
             <div class="p-8 bg-yellow-400 border-circle"></div>
-            <label class="mt-3 text-3xl">Profil Verwalten</label>
+            <label class="mt-3 text-3xl">Profile Verwalten</label>
         </div>
     </div>
 </div>
 
 
 <app-add-sub-profile-dialog *ngIf="addSubProfileDialogVisible" (close)="closeAddSubProfileDialog()" (subProfileAdded)="onSubProfileAdded()"></app-add-sub-profile-dialog>
-<app-manage-sub-profile-dialog *ngIf="manageSubProfileDialogVisible" (close)="closeManageSubProfileDialog()"></app-manage-sub-profile-dialog>
+<app-manage-sub-profile-dialog *ngIf="manageSubProfileDialogVisible" (close)="closeManageSubProfileDialog()" (subProfileAdded)="onSubProfileChanged()"></app-manage-sub-profile-dialog>

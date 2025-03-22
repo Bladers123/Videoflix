@@ -3,21 +3,24 @@
     <div
         class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-6 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-        <span class="text-5xl">Passwort anfordern</span>
-<span>
-    Passwort vergessen?<br><br>
-    <br>Wenn Sie Ihr Passwort vergessen haben, geben Sie bitte Ihre registrierte E-Mail-Adresse in das untenstehende Feld ein.
-    <br><br>Wir senden Ihnen umgehen ein neues Passwort zu.
-    <br><br>Sollten Sie innerhalb weniger Minuten keine E-Mail erhalten, überprüfen Sie bitte auch Ihren Spam-Ordner. 
-    <br><br>Bei weiteren Fragen können Sie sich jederzeit an unseren Support wenden.
-</span>
+        <span class="text-5xl">Profile bearbeiten</span>
+        <span class="text-center">Wählen Sie Ihr Profil aus, das Sie ändern oder löschen möchten.</span>
+
+        <p-autocomplete [(ngModel)]="selectedProfile" [dropdown]="true" [suggestions]="subProfiles"
+            (completeMethod)="search($event)" readonly="true" field="name" (onSelect)="onSelectProfile($event)" />
+
+
+        <span class="text-center">Schreiben Sie hier den neuen Namen für Ihr Profil rein und drücken Sie dann auf speichern.</span>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="email-input" [(ngModel)]="email"
-                autocomplete="on" [ngClass]="{'p-filled': email}" />
-            <label class="w-full" for="email-input">*E-Mail-Adresse</label>
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="name-input" [(ngModel)]="name"
+                autocomplete="on" [ngClass]="{'p-filled': name}" />
+            <label class="w-full" for="name-input">*Name</label>
         </p-floatlabel>
 
-        <button [disabled]="isSending" (click)="requestRecoverPassword()" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Passwort anfordern</button>
+        <button [disabled]="isSending" (click)="saveSubProfileChanges()"
+            class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Speichern</button>
+        <button [disabled]="isSending" (click)="deleteSubProfileChanges()"
+            class="p-3 w-9 text-xl bg-red300 border-none border-round cursor-pointer hover:bg-red-400">Löschen</button>
     </div>
-   <app-toast></app-toast>
+    <app-toast></app-toast>
 </div>

@@ -27,7 +27,33 @@ export class SubProfileService {
   }
 
   getSubProfileData(): Observable<SubProfile[]> {
-    return this.restClientService.getSubProfile().pipe(
+    return this.restClientService.getAllSubProfiles().pipe(
+      map((response: any) => {
+        if (response)
+          return response;
+      }),
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    );
+  }
+
+  updateSubProfile(subProfile: SubProfile): Observable<any> {
+    return this.restClientService.putSubProfile(subProfile).pipe(
+      map((response: any) => {
+        if (response)
+          return response;
+      }),
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    );
+  }
+
+  deleteSubProfile(subProfile: SubProfile){
+    return this.restClientService.deleteSubProfile(subProfile).pipe(
       map((response: any) => {
         if (response)
           return response;
