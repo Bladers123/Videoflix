@@ -62,7 +62,12 @@ export class RestClientService {
 
   getSubProfilesByProfileId(id: string): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();    
-    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_SUBPROFILE + id, { headers });
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_PROFILE + id, { headers });
+  }
+
+  getSubProfileById(id: string): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_ID + id, { headers });
   }
 
   postSubProfile(data: SubProfile): Observable<any> {

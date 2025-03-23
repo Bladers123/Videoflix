@@ -30,6 +30,21 @@ export class SubProfileService {
     return this.restClientService.getSubProfilesByProfileId(id).pipe(
       map((response: any) => {
         if (response)
+          console.log(response);
+          
+          return response;
+      }),
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    );
+  }
+
+  getSubProfileById(id: string): Observable<SubProfile> {
+    return this.restClientService.getSubProfileById(id).pipe(
+      map((response: any) => {
+        if (response)          
           return response;
       }),
       catchError(err => {

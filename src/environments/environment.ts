@@ -10,6 +10,7 @@ export const environment = {
     ENDPOINT_PROFILE: 'profile/profile-list/',
     ENDPOINT_SUBPROFILE: 'profile/sub-profile-list/',
 
-    QUERY_PARAM_SUBPROFILE: '?profile=',
+    QUERY_PARAM_PROFILE: '?profile=',
+    QUERY_PARAM_ID: '?id=',
   };
   
