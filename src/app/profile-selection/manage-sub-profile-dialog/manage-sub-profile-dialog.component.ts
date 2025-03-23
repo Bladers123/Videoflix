@@ -40,7 +40,9 @@ export class ManageSubProfileDialogComponent implements OnInit {
   constructor(private authService: AuthService, private subProfileService: SubProfileService) { }
 
   ngOnInit() {
-    this.subProfileService.getSubProfileData().subscribe({
+    const user = this.authService.user;
+    if(user){    
+    this.subProfileService.getSubProfilesByProfileId(user.profile).subscribe({
       next: (subProfiles) => {
         this.subProfiles = subProfiles;
       },
@@ -48,6 +50,7 @@ export class ManageSubProfileDialogComponent implements OnInit {
         this.toastComponent.showLoadingError(error);
       }
     });
+  }
   }
 
 

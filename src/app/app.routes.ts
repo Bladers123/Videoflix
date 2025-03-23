@@ -12,5 +12,5 @@ export const routes: Routes = [
     { path: '', component: SplashScreenComponent },
     { path: 'auth', component: AuthComponent }, 
     { path: 'profile-selection', component: ProfileSelectionComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'home/:id', component: HomeComponent },
 ];

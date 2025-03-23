@@ -60,9 +60,9 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_PROFILE + id, { headers });
   }
 
-  getAllSubProfiles(): Observable<any> {
-    const headers = this.getAuthorizationTokenHeader();
-    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, { headers });
+  getSubProfilesByProfileId(id: string): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();    
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_SUBPROFILE + id, { headers });
   }
 
   postSubProfile(data: SubProfile): Observable<any> {
@@ -82,9 +82,8 @@ export class RestClientService {
 
 
 
-  postProfile(): Observable<any> {
-    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_PROFILE, {});
-  }
+
+  
 
   putProfile(data: any): Observable<any> {
     return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE, data);

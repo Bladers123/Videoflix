@@ -9,5 +9,7 @@ export const environment = {
     ENDPOINT_VERIFY: 'auth/verify/',
     ENDPOINT_PROFILE: 'profile/profile-list/',
     ENDPOINT_SUBPROFILE: 'profile/sub-profile-list/',
+
+    QUERY_PARAM_SUBPROFILE: '?profile=',
   };
   

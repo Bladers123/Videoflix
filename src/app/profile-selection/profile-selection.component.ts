@@ -12,6 +12,7 @@ import { ManageSubProfileDialogComponent } from "./manage-sub-profile-dialog/man
 import { Profile } from '../shared/interfaces/profile.interface';
 import { filter, take } from 'rxjs';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ProfileSelectionComponent implements OnInit {
 
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
-
+  subProfilePath: string | null = null;
   addSubProfileDialogVisible: boolean = false;
   manageSubProfileDialogVisible: boolean = false;
 
@@ -75,14 +76,17 @@ export class ProfileSelectionComponent implements OnInit {
   }
 
   loadSubProfiles() {
-    this.subProfileService.getSubProfileData().subscribe({
-      next: (subProfiles: SubProfile[]) => {
-        this.subProfiles = subProfiles;
-      },
-      error: err => {
-        this.toastComponent.showLoginError(err);
-      }
-    });
+    const user = this.authService.user;
+    if (user) {
+      this.subProfileService.getSubProfilesByProfileId(user.profile).subscribe({
+        next: (subProfiles: SubProfile[]) => {
+          this.subProfiles = subProfiles;
+        },
+        error: err => {
+          this.toastComponent.showLoginError(err);
+        }
+      });
+    }
   }
 
   onSubProfileAdded() {
@@ -111,8 +115,8 @@ export class ProfileSelectionComponent implements OnInit {
     this.manageSubProfileDialogVisible = false;
   }
 
-  navigateToHome() {
-    this.router.navigate(['/home']);
+  navigateToHome(id: string) {
+    this.router.navigate(['/home', id]);
   }
 
 }

@@ -26,8 +26,8 @@ export class SubProfileService {
     )
   }
 
-  getSubProfileData(): Observable<SubProfile[]> {
-    return this.restClientService.getAllSubProfiles().pipe(
+  getSubProfilesByProfileId(id: string): Observable<SubProfile[]> {
+    return this.restClientService.getSubProfilesByProfileId(id).pipe(
       map((response: any) => {
         if (response)
           return response;
