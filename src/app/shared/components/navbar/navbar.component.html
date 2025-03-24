@@ -1,4 +1,19 @@
-<div>
-    <img (click)="navigateToStartScreen()" class="w-10rem absolute top-0 left-0 cursor-pointer" src="img/logo.png" alt="logo">
-    
+<div class="top-level">
+    <div class="flex justify-content-between align-items-center mr-6 ml-6">
+        <div class="flex justify-content-between align-items-center gap-5">
+            <img class="w-10rem" src="img/logo.png" alt="logo">
+            <a class="" href="#movie">Filme</a>
+            <span>Serien</span>
+            <span>Clips</span>
+        </div>
+
+        <div class="card flex justify-center">
+            <p-menu #menu [model]="items" [popup]="true" />
+            <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" />
+        </div>
+    </div>
 </div>
+
+
+<app-change-user-data-dialog *ngIf="changeProfileDataDialogVisible"
+    (close)="closecCangeProfileDataDialog()"></app-change-user-data-dialog>

@@ -80,6 +80,12 @@ export class AuthService {
     );
   }
 
+  logout(){
+    this.localStorageService.removeItem('user');
+    this.user = undefined;
+    this.router.navigate(['/auth']);
+  }
+
 
   verifyUser(): Observable<boolean> {
     const user: User | null = this.localStorageService.getItem('user');    

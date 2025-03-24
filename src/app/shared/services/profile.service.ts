@@ -4,9 +4,11 @@ import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "r
 import { Profile } from "../interfaces/profile.interface";
 import { SubProfile } from "../interfaces/sub-profile.interace";
 import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
+
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 
@@ -16,10 +18,10 @@ export class ProfileService {
   profile$ = this.profileSubject.asObservable();
 
 
-  constructor(private restClientService: RestClientService) { }
+  constructor(private restClientService: RestClientService, private router: Router) { }
 
 
-  getProfileById(id: string): Observable<Profile | null> {    
+  getProfileById(id: string): Observable<Profile | null> {
     return this.restClientService.getProfileById(id).pipe(
       tap(profile => this.profileSubject.next(profile)),
       catchError(err => {
@@ -27,8 +29,12 @@ export class ProfileService {
         return throwError(err);
       })
     );
-  }  
-  
+  }
+
+  changeProfile() {
+    this.router.navigate(['/profile-selection']);
+  }
+
 
   private extractErrorMessages(errorResponse: any): string {
     let errorMessages: string[] = [];

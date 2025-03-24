@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { SubProfileService } from '../shared/services/sub-profile.service';
+import { SubProfileService } from './sub-profile.service';
 
 @Injectable({
   providedIn: 'root'
