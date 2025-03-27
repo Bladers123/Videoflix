@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
         this.authService.logout();
     }
 
-    closecCangeProfileDataDialog(){
+    onClosecCangeProfileDataDialog(){
         this.changeProfileDataDialogVisible = false;
     }
     

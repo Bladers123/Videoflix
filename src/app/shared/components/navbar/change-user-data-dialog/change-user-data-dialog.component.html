@@ -1,1 +1,51 @@
-<p>change-user-data-dialog works!</p>
+<div class="top-level flex flex-column justify-content-center align-items-center h-full">
+    <div
+        class="dialog-content flex justify-content-center align-items-center flex-column w-8 height-55vh gap-6 border-round relative p-5 border-round-lg">
+        <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
+        <img src="" alt="">
+        <span class="text-5xl">Accountdaten</span>
+        <span>({{profile.username}})</span>
+        <span class="text-center"></span>
+
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="firstname-input"
+                [(ngModel)]="profile.first_name" autocomplete="on" [ngClass]="{'p-filled': profile.first_name}" />
+            <label class="w-full" for="firstname-input">Vorname</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="lastname-input"
+                [(ngModel)]="profile.last_name" autocomplete="on" [ngClass]="{'p-filled': profile.last_name}" />
+            <label class="w-full" for="lastname-input">Nachname</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input" [(ngModel)]="profile.username"
+                autocomplete="on" [ngClass]="{'p-filled': profile.username}" />
+            <label class="w-full" for="username-input">Nutzername</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input"
+                [(ngModel)]="profile.password" autocomplete="on" [ngClass]="{'p-filled': profile.password}" />
+            <label class="w-full" for="password-input">Neues Passwort</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="confirm-password-input"
+                [(ngModel)]="confirmPassword" autocomplete="on" [ngClass]="{'p-filled': confirmPassword}" />
+            <label class="w-full" for="confirm-password-input">Passwort wiederholen</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="address-input" [(ngModel)]="profile.address"
+                autocomplete="on" [ngClass]="{'p-filled': profile.address}" />
+            <label class="w-full" for="address-input">Adresse</label>
+        </p-floatlabel>
+        <p-floatlabel class="w-9" variant="in">
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="phone-input" [(ngModel)]="profile.phone"
+                autocomplete="on" [ngClass]="{'p-filled': profile.phone}" />
+            <label class="w-full" for="phone-input">Telefonnummer</label>
+        </p-floatlabel>
+
+        <button (click)="onAdoptChanges()" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Änderungen
+            übernehmen</button>
+    </div>
+</div>
+
+<app-toast></app-toast>

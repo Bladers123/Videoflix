@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../interfaces/user.interface';
 import { SubProfile } from '../interfaces/sub-profile.interace';
+import { Profile } from '../interfaces/profile.interface';
 
 
 
@@ -51,9 +52,10 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_VERIFY, { headers });
   }
 
-
-
-
+  getUser(): Observable<any>{
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_USER, { headers });
+  }
 
   getProfileById(id: string): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
@@ -61,7 +63,7 @@ export class RestClientService {
   }
 
   getSubProfilesByProfileId(id: string): Observable<any> {
-    const headers = this.getAuthorizationTokenHeader();    
+    const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_PROFILE + id, { headers });
   }
 
@@ -70,9 +72,9 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + environment.QUERY_PARAM_ID + id, { headers });
   }
 
-  postSubProfile(data: SubProfile): Observable<any> {
+  postSubProfile(subProfile: SubProfile): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
-    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, data, { headers });
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE, subProfile, { headers });
   }
 
   putSubProfile(subProfile: SubProfile): Observable<any> {
@@ -81,21 +83,12 @@ export class RestClientService {
   }
 
   deleteSubProfile(subProfile: SubProfile): Observable<any> {
-    const headers = this.getAuthorizationTokenHeader();    
+    const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.delete(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subProfile.id + '/', { headers });
   }
 
-
-
-
-  
-
-  putProfile(data: any): Observable<any> {
-    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE, data);
+  putProfile(profile: Profile): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE + profile.id + '/', profile, { headers });
   }
-
-
-
-
-
 }

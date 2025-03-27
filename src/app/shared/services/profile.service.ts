@@ -31,9 +31,21 @@ export class ProfileService {
     );
   }
 
+  updateProfile(profile: Profile): Observable<any> {
+    return this.restClientService.putProfile(profile).pipe(
+      tap(() => this.profileSubject.next(profile)),
+      catchError(err => {
+        console.error('Fehler beim Aktualisieren des Profils', err);
+        return throwError(err);
+      })
+    );
+  }
+
   changeProfile() {
     this.router.navigate(['/profile-selection']);
   }
+
+
 
 
   private extractErrorMessages(errorResponse: any): string {

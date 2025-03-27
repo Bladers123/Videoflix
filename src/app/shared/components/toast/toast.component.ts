@@ -145,4 +145,22 @@ export class ToastComponent {
     });
     await this.waitOfPromise();
   }
+
+  async showAdoptProfileSuccessfully(message: string = 'Erfolgreich adoptiert!'){
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showAdoptProfileError(message: string = 'Adoptieren fehlgeschlagen!'){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
 }

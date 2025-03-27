@@ -56,6 +56,26 @@ export class AuthService {
         let errorMsg = 'Login fehlgeschlagen.';
         if (err.error)
           errorMsg = this.extractErrorMessages(err.error);
+        return throwError(errorMsg);
+      })
+    );
+  }
+
+  loadUserFromDB(): Observable<any> {
+    return this.restClientService.getUser().pipe(
+      map(response => {
+        if (response) {
+          this.localStorageService.setItem('user', response);
+          this.user = response;          
+          return response.message;
+        }
+        else
+          return 'Login fehlgeschlagen.';
+      }),
+      catchError(err => {
+        let errorMsg = 'Login fehlgeschlagen.';
+        if (err.error)
+          errorMsg = this.extractErrorMessages(err.error);
 
         return throwError(errorMsg);
       })
@@ -80,7 +100,7 @@ export class AuthService {
     );
   }
 
-  logout(){
+  logout() {
     this.localStorageService.removeItem('user');
     this.user = undefined;
     this.router.navigate(['/auth']);
@@ -88,12 +108,12 @@ export class AuthService {
 
 
   verifyUser(): Observable<boolean> {
-    const user: User | null = this.localStorageService.getItem('user');    
+    const user: User | null = this.localStorageService.getItem('user');
     if (!user) {
       this.router.navigate(['/auth']);
       return of(false);
     }
-  
+
     this.user = user;
     return this.restClientService.getVerifyUser().pipe(
       map(response => {
@@ -109,7 +129,7 @@ export class AuthService {
       })
     );
   }
-  
+
 
 
 

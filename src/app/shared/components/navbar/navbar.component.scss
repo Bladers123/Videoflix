@@ -1,12 +1,15 @@
 p-button {
-    --p-button-primary-background: #801c0a !important;
-    --p-button-primary-hover-background: #cc725c !important;
-    --p-button-primary-focus-ring-color: #801c0a !important;
-    --p-button-primary-active-background: #801c0a !important;
-    --p-button-primary-hover-border-color: #801c0a !important;
+    --p-button-primary-background: #5b342d !important;
+    --p-button-primary-hover-background: #4d170e !important;
+    --p-button-primary-focus-ring-color: #5b342d !important;
+    --p-button-primary-active-background: #5b342d !important;
+    --p-button-primary-hover-border-color: #5b342d !important;
     --p-button-primary-color: #ffffff !important;
     --p-button-primary-border-color: #123456 !important;
     --p-button-primary-active-border-color: #801c0a !important;
     cursor: pointer !important;
 }
 
+.shadow{
+    box-shadow: 0 4px 6px rgba(185, 27, 27, 0.1);
+}

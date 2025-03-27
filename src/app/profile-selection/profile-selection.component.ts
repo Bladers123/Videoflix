@@ -37,8 +37,8 @@ export class ProfileSelectionComponent implements OnInit {
   profile: Profile = {
     id: '',
     username: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     address: '',
@@ -65,7 +65,7 @@ export class ProfileSelectionComponent implements OnInit {
         .subscribe({
           next: (profile: Profile | null) => {
             if (profile) {
-              this.profile = profile;
+              this.profile = profile;              
             }
           },
           error: err => {

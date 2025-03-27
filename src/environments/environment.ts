@@ -5,6 +5,7 @@ export const environment = {
 
     ENDPOINT_REGISTRATION: 'auth/registration/',
     ENDPOINT_LOGIN: 'auth/login/',
+    ENDPOINT_USER: 'auth/user/',
     ENDPOINT_RECOVERY_PASSWORD: 'auth/recovery-password/',
     ENDPOINT_VERIFY: 'auth/verify/',
     ENDPOINT_PROFILE: 'profile/profile-list/',
