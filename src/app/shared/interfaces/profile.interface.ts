@@ -7,4 +7,5 @@ export interface Profile{
     password: string;
     address: string;
     phone: string;
+    img?: string;
 }

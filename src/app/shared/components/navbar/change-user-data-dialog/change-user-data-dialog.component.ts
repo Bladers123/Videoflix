@@ -10,11 +10,12 @@ import { Profile } from '../../../interfaces/profile.interface';
 import { take } from 'rxjs';
 import { ToastComponent } from '../../toast/toast.component';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
 
 
 @Component({
   selector: 'app-change-user-data-dialog',
-  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, ToastComponent],
+  imports: [AutoCompleteModule, IftaLabelModule, FormsModule, FloatLabelModule, CommonModule, ToastComponent, FileUploadModule],
   templateUrl: './change-user-data-dialog.component.html',
   styleUrl: './change-user-data-dialog.component.scss'
 })
@@ -22,10 +23,10 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 
 export class ChangeUserDataDialogComponent implements OnInit {
 
-
   @Output() close = new EventEmitter<void>();
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
+  imageSrc: string = '';
   confirmPassword: string = '';
 
   profile: Profile = {
@@ -36,7 +37,8 @@ export class ChangeUserDataDialogComponent implements OnInit {
     email: '',
     password: '',
     address: '',
-    phone: ''
+    phone: '',
+    img: '',
   };
 
 
@@ -55,6 +57,7 @@ export class ChangeUserDataDialogComponent implements OnInit {
           next: (profile: Profile | null) => {
             if (profile) {
               this.profile = profile;
+              this.imageSrc = profile.img || 'img/blank-profile.png';
             }
           },
           error: err => {
@@ -68,12 +71,11 @@ export class ChangeUserDataDialogComponent implements OnInit {
     if (this.validateInputs()) {
       this.profileService.updateProfile(this.profile).subscribe({
         next: (response) => {
-          console.log(response);
           this.authService.loadUserFromDB().subscribe(message => {
-            this.toastComponent.showAdoptProfileSuccessfully(message);
+            this.toastComponent.showAdoptProfileSuccessfully(response.message);
           });
 
-          // this.closeDialog();
+          this.closeDialog();
         },
         error: err => {
           this.toastComponent.showAdoptProfileError(err);
@@ -82,48 +84,86 @@ export class ChangeUserDataDialogComponent implements OnInit {
     }
   }
 
+
+
+
+  onSelectImage(event: any) {
+    if (event.files && event.files.length > 0) {
+      const file: File = event.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageSrc = e.target.result;
+        this.profile.img = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   validateInputs(): boolean {
-    if (this.profile.password !== this.confirmPassword) {
+    // Sicherstellen, dass undefinierte Werte in leere Strings umgewandelt werden, um Fehler zu vermeiden.
+    const password: string = this.profile.password || '';
+    const confirmPassword: string = this.confirmPassword || '';
+    const email: string = this.profile.email || '';
+    const phone: string = this.profile.phone || '';
+    const address: string = this.profile.address || '';
+    const firstName: string = this.profile.first_name || '';
+    const lastName: string = this.profile.last_name || '';
+    const username: string = this.profile.username || '';
+  
+    // Überprüfung, ob die Passwörter übereinstimmen.
+    if (password !== confirmPassword) {
       this.toastComponent.showAdoptProfileError('Passwörter stimmen nicht überein');
       return false;
     }
-    else if (this.profile.password.length < 8) {
+  
+    // Überprüfung, ob das Passwort mindestens 8 Zeichen lang ist.
+    if (password.length < 8 && password.length > 0) {
       this.toastComponent.showAdoptProfileError('Passwort muss mindestens 8 Zeichen lang sein');
       return false;
     }
-
-    else if (!this.profile.email.includes('@')) {
+  
+    // Überprüfung der E-Mail-Adresse auf ein '@'-Zeichen.
+    if (!email.includes('@')) {
       this.toastComponent.showAdoptProfileError('Ungültige E-Mail-Adresse');
       return false;
     }
-
-    else if (this.profile.phone.length < 10) {
+  
+    // Überprüfung der Telefonnummer (z. B. Mindestlänge 10 Zeichen)
+    if (phone.length < 10) {
       this.toastComponent.showAdoptProfileError('Ungültige Telefonnummer');
       return false;
     }
-
-    else if (this.profile.address.length < 5) {
+  
+    // Überprüfung der Adresse (Mindestlänge 5 Zeichen)
+    if (address.length < 5) {
       this.toastComponent.showAdoptProfileError('Ungültige Adresse');
       return false;
     }
-
-    else if (this.profile.first_name.length < 2) {
+  
+    // Überprüfung des Vornamens (Mindestlänge 2 Zeichen)
+    if (firstName.length < 2) {
       this.toastComponent.showAdoptProfileError('Ungültiger Vorname');
       return false;
     }
-
-    else if (this.profile.last_name.length < 2) {
+  
+    // Überprüfung des Nachnamens (Mindestlänge 2 Zeichen)
+    if (lastName.length < 2) {
       this.toastComponent.showAdoptProfileError('Ungültiger Nachname');
       return false;
     }
-
-    else if (this.profile.username.length < 2) {
+  
+    // Überprüfung des Benutzernamens (Mindestlänge 2 Zeichen)
+    if (username.length < 2) {
       this.toastComponent.showAdoptProfileError('Ungültiger Benutzername');
       return false;
     }
-
+  
+    // Wenn alle Prüfungen erfolgreich waren, gebe true zurück.
     return true;
   }
+  
 
   closeDialog() {
     this.close.emit();

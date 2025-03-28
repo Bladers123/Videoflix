@@ -146,7 +146,7 @@ export class ToastComponent {
     await this.waitOfPromise();
   }
 
-  async showAdoptProfileSuccessfully(message: string = 'Erfolgreich adoptiert!'){
+  async showAdoptProfileSuccessfully(message: string = 'Erfolgreich geändert!'){
     this.messageService.add({
       severity: 'success',
       summary: 'Erfolgreich',
@@ -155,7 +155,7 @@ export class ToastComponent {
     await this.waitOfPromise();
   }
 
-  async showAdoptProfileError(message: string = 'Adoptieren fehlgeschlagen!'){
+  async showAdoptProfileError(message: string = 'Änderung fehlgeschlagen!'){
     this.messageService.add({
       severity: 'error',
       summary: 'Fehlgeschlagen',

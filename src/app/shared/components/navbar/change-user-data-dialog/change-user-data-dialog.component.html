@@ -1,11 +1,11 @@
 <div class="top-level flex flex-column justify-content-center align-items-center h-full">
     <div
-        class="dialog-content flex justify-content-center align-items-center flex-column w-8 height-55vh gap-6 border-round relative p-5 border-round-lg">
+        class="dialog-content flex justify-content-center align-items-center flex-column w-8 gap-6 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-        <img src="" alt="">
         <span class="text-5xl">Accountdaten</span>
-        <span>({{profile.username}})</span>
-        <span class="text-center"></span>
+        <img class="w-2 border-circle" [src]="imageSrc" alt="">
+        
+        <p-fileupload mode="basic" name="demo[]" chooseIcon="pi pi-upload" accept="image/*" maxFileSize="1000000" (onSelect)="onSelectImage($event)" [auto]="true" chooseLabel="Bild auswählen" />
 
         <p-floatlabel class="w-9" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="firstname-input"
@@ -18,12 +18,12 @@
             <label class="w-full" for="lastname-input">Nachname</label>
         </p-floatlabel>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input" [(ngModel)]="profile.username"
-                autocomplete="on" [ngClass]="{'p-filled': profile.username}" />
+            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input"
+                [(ngModel)]="profile.username" autocomplete="on" [ngClass]="{'p-filled': profile.username}" />
             <label class="w-full" for="username-input">Nutzername</label>
         </p-floatlabel>
         <p-floatlabel class="w-9" variant="in">
-            <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input"
+            <input type="password" class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="password-input"
                 [(ngModel)]="profile.password" autocomplete="on" [ngClass]="{'p-filled': profile.password}" />
             <label class="w-full" for="password-input">Neues Passwort</label>
         </p-floatlabel>
@@ -43,7 +43,8 @@
             <label class="w-full" for="phone-input">Telefonnummer</label>
         </p-floatlabel>
 
-        <button (click)="onAdoptChanges()" class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Änderungen
+        <button (click)="onAdoptChanges()"
+            class="p-3 w-9 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Änderungen
             übernehmen</button>
     </div>
 </div>
