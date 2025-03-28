@@ -28,6 +28,8 @@ export class ChangeUserDataDialogComponent implements OnInit {
 
   imageSrc: string = '';
   confirmPassword: string = '';
+  selectedFile: File | null = null;
+
 
   profile: Profile = {
     id: '',
@@ -67,14 +69,41 @@ export class ChangeUserDataDialogComponent implements OnInit {
     }
   }
 
+  onSelectImage(event: any) {
+    if (event.files && event.files.length > 0) {
+      const file: File = event.files[0];
+      this.selectedFile = file; // Datei speichern
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageSrc = e.target.result; // Vorschau als Base64-String
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   onAdoptChanges() {
     if (this.validateInputs()) {
-      this.profileService.updateProfile(this.profile).subscribe({
+      const formData = new FormData();
+      // ID nicht anhängen, da diese in der URL enthalten ist
+      formData.append('username', this.profile.username);
+      formData.append('first_name', this.profile.first_name);
+      formData.append('last_name', this.profile.last_name);
+      formData.append('email', this.profile.email);
+      formData.append('password', this.profile.password);
+      formData.append('address', this.profile.address);
+      formData.append('phone', this.profile.phone);
+      if (this.selectedFile) {
+        formData.append('img', this.selectedFile, this.selectedFile.name);
+      }
+      
+      // updateProfile erwartet jetzt FormData sowie die Profil-ID
+      this.profileService.updateProfile(formData, this.profile.id).subscribe({
         next: (response) => {
           this.authService.loadUserFromDB().subscribe(message => {
             this.toastComponent.showAdoptProfileSuccessfully(response.message);
           });
-
           this.closeDialog();
         },
         error: err => {
@@ -83,23 +112,8 @@ export class ChangeUserDataDialogComponent implements OnInit {
       });
     }
   }
-
-
-
-
-  onSelectImage(event: any) {
-    if (event.files && event.files.length > 0) {
-      const file: File = event.files[0];
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.imageSrc = e.target.result;
-        this.profile.img = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }
+  
+  
 
   validateInputs(): boolean {
     // Sicherstellen, dass undefinierte Werte in leere Strings umgewandelt werden, um Fehler zu vermeiden.

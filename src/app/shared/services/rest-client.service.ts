@@ -91,4 +91,10 @@ export class RestClientService {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.put(environment.BASE_URL + environment.ENDPOINT_PROFILE + profile.id + '/', profile, { headers });
   }
+
+  putProfileFormData(formData: FormData, id: string): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.patch(environment.BASE_URL + environment.ENDPOINT_PROFILE + id + '/', formData, { headers });
+  }
+  
 }

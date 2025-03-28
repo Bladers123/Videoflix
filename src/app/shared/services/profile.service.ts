@@ -31,9 +31,9 @@ export class ProfileService {
     );
   }
 
-  updateProfile(profile: Profile): Observable<any> {
-    return this.restClientService.putProfile(profile).pipe(
-      tap(() => this.profileSubject.next(profile)),
+  updateProfile(formData: FormData, id: string): Observable<any> {
+    return this.restClientService.putProfileFormData(formData, id).pipe(
+      tap(() => this.profileSubject.next(null)),
       catchError(err => {
         console.error('Fehler beim Aktualisieren des Profils', err);
         return throwError(err);
