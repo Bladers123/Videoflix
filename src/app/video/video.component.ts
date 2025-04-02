@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import Hls from 'hls.js';
 
 @Component({
@@ -9,6 +9,8 @@ import Hls from 'hls.js';
 export class VideoComponent {
 
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef<HTMLVideoElement>;
+  @Output() close = new EventEmitter<void>();
+
   // URL des HLS-Streams
   videoUrl = 'http://127.0.0.1:8000/api/video/index.m3u8';
   // Flag, um zu verhindern, dass der Stream mehrfach geladen wird
@@ -50,5 +52,9 @@ export class VideoComponent {
       }
       this.isVideoLoaded = true;
     }
+  }
+
+  closeDialog() {
+    this.close.emit();
   }
 }

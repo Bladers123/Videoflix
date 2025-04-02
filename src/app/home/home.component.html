@@ -1,12 +1,36 @@
 <app-navbar></app-navbar>
-<div class="top-level">
-    <div>
-        <span>Filme</span>
-        <div></div>
-    </div>
-     <app-video></app-video>
+<div class="top-level content">
 
-    <span>Serien</span>
-    <span>Clips</span>
-    <span>Meine Liste</span>
+    <p-carousel >
+      
+                <div (click)="onPoster()">
+                    <app-video-poster></app-video-poster>
+                </div>
+      
+    </p-carousel>
+
+    <div>
+        <h2>Filme</h2>
+        <div (click)="onPoster()">
+            <app-video-poster></app-video-poster>
+        </div>
+    </div>
+
+    <div>
+        <h2>Serien</h2>
+        <div (click)="onPoster()">
+            <app-video-poster></app-video-poster>
+        </div>
+    </div>
+
+    <div>
+        <h2>Clips</h2>
+        <div (click)="onPoster()">
+            <app-video-poster></app-video-poster>
+        </div>
+    </div>
+
 </div>
+
+
+<app-video (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
