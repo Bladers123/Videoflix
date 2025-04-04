@@ -1,35 +1,31 @@
 <app-navbar></app-navbar>
 <div class="top-level content">
 
-    <p-carousel >
-      
-                <div (click)="onPoster()">
-                    <app-video-poster></app-video-poster>
-                </div>
-      
+  <div>
+    <h2>Filme</h2>
+    <p-carousel [value]="posters" [numVisible]="4" [numScroll]="4" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-poster #item>
+        <div (click)="onPoster(poster)" class="m-2 p-2 shadow-md rounded">
+          <app-video-poster></app-video-poster>
+        </div>
+      </ng-template>
     </p-carousel>
+  </div>
 
-    <div>
-        <h2>Filme</h2>
-        <div (click)="onPoster()">
-            <app-video-poster></app-video-poster>
+  <div>
+    <h2>Clips</h2>
+    <p-carousel [value]="posters" [numVisible]="4" [numScroll]="4" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-poster #item>
+        <div (click)="onPoster(poster)" class="m-2 p-2 shadow-md rounded">
+          <app-video-poster></app-video-poster>
         </div>
-    </div>
+      </ng-template>
+    </p-carousel>
+  </div>
 
-    <div>
-        <h2>Serien</h2>
-        <div (click)="onPoster()">
-            <app-video-poster></app-video-poster>
-        </div>
-    </div>
-
-    <div>
-        <h2>Clips</h2>
-        <div (click)="onPoster()">
-            <app-video-poster></app-video-poster>
-        </div>
-    </div>
-
+  
 </div>
 
 

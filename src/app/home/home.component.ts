@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
 
   isVideoVisible: boolean = false;
 
+  posters: any[] = [];
+
+  responsiveOptions: any[] | undefined;
   
 
   constructor(private authService: AuthService, private subProfileService: SubProfileService, private router: Router) { }
@@ -32,6 +35,7 @@ export class HomeComponent implements OnInit {
     this.authService.verifyUser().subscribe(isVerified => {
       if (isVerified) {
         this.loadBoard();
+        this.initPoster();
       }
     });
   }
@@ -40,7 +44,7 @@ export class HomeComponent implements OnInit {
     
   }
 
-  onPoster(){
+  onPoster(poster: any){
     this.isVideoVisible = true;
   }
 
@@ -49,6 +53,16 @@ export class HomeComponent implements OnInit {
   }
 
 
+  initPoster() {
+    this.posters = Array.from({ length: 10 }); // z.B. 10 Poster – später ersetzt du das durch echte Daten
+
+    this.responsiveOptions = [
+      { breakpoint: '1400px', numVisible: 4, numScroll: 2 },
+      { breakpoint: '1199px', numVisible: 3, numScroll: 1 },
+      { breakpoint: '767px', numVisible: 2, numScroll: 1 },
+      { breakpoint: '575px', numVisible: 1, numScroll: 1 }
+    ];
+  }
 }
 
 
