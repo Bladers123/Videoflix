@@ -1,32 +1,35 @@
 <app-navbar></app-navbar>
 <div class="top-level content">
 
-  <div>
-    <h2>Filme</h2>
-    <p-carousel [value]="posters" [numVisible]="4" [numScroll]="4" [circular]="false"
-      [responsiveOptions]="responsiveOptions">
-      <ng-template let-poster #item>
-        <div (click)="onPoster(poster)" class="m-2 p-2 shadow-md rounded">
-          <app-video-poster></app-video-poster>
-        </div>
-      </ng-template>
-    </p-carousel>
-  </div>
 
-  <div>
-    <h2>Clips</h2>
-    <p-carousel [value]="posters" [numVisible]="4" [numScroll]="4" [circular]="false"
-      [responsiveOptions]="responsiveOptions">
-      <ng-template let-poster #item>
-        <div (click)="onPoster(poster)" class="m-2 p-2 shadow-md rounded">
-          <app-video-poster></app-video-poster>
-        </div>
-      </ng-template>
-    </p-carousel>
-  </div>
+    <div>
+      <h2>Filme</h2>
+      <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
+        [responsiveOptions]="responsiveOptions">
+        <ng-template let-title #item>
+          <div (click)="onPoster(title)" class="m-2 p-2 shadow-md rounded">
+            <h3>{{ capitalizeTitle(title) }}</h3>
+            <app-video-poster></app-video-poster>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
 
-  
+    <div>
+      <h2>Clips</h2>
+      <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
+        [responsiveOptions]="responsiveOptions">
+        <ng-template let-title #item>
+          <div (click)="onPoster(title)" class="m-2 p-2 shadow-md rounded">
+            <h3>{{ capitalizeTitle(title) }}</h3>
+            <app-video-poster></app-video-poster>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+
 </div>
 
 
-<app-video (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
+<app-video [title]="selectedTitle" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>

@@ -96,5 +96,12 @@ export class RestClientService {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.patch(environment.BASE_URL + environment.ENDPOINT_PROFILE + id + '/', formData, { headers });
   }
+
+
+
+  getVideoNames(): Observable<string[]> {
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.get<string[]>(environment.BASE_URL + environment.ENDPOINT_VIDEONAME, { headers });
+  }
   
 }

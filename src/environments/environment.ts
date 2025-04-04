@@ -8,8 +8,12 @@ export const environment = {
     ENDPOINT_USER: 'auth/user/',
     ENDPOINT_RECOVERY_PASSWORD: 'auth/recovery-password/',
     ENDPOINT_VERIFY: 'auth/verify/',
+
     ENDPOINT_PROFILE: 'profile/profile-list/',
     ENDPOINT_SUBPROFILE: 'profile/sub-profile-list/',
+
+    ENDPOINT_VIDEONAME: 'video/videoname/',
+
 
     QUERY_PARAM_PROFILE: '?profile=',
     QUERY_PARAM_ID: '?id=',
