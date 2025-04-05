@@ -124,47 +124,48 @@ export class ChangeUserDataDialogComponent implements OnInit {
     const username: string = this.profile.username || '';
   
     if (password !== confirmPassword) {
-      this.toastComponent.showAdoptProfileError('Passwörter stimmen nicht überein');
+      this.toastComponent.showAdoptProfileError('Passwörter stimmen nicht überein.');
       return false;
     }
-  
+
     if (password.length < 8 && password.length > 0) {
-      this.toastComponent.showAdoptProfileError('Passwort muss mindestens 8 Zeichen lang sein');
+      this.toastComponent.showAdoptProfileError('Passwort muss mindestens 8 Zeichen lang sein.');
       return false;
     }
-  
+
     if (!email.includes('@')) {
-      this.toastComponent.showAdoptProfileError('Ungültige E-Mail-Adresse');
+      this.toastComponent.showAdoptProfileError('Ungültige E-Mail-Adresse.');
       return false;
     }
-  
-    if (phone.length < 10) {
-      this.toastComponent.showAdoptProfileError('Ungültige Telefonnummer');
+
+    if (phone.length < 5) {
+      this.toastComponent.showAdoptProfileError('Die Telefonnummer muss mindestens 5 Zahlen besitzen.');
       return false;
     }
-  
+
     if (address.length < 5) {
-      this.toastComponent.showAdoptProfileError('Ungültige Adresse');
+      this.toastComponent.showAdoptProfileError('Die Adresse muss mindestens 5 Zeichen besitzen.');
       return false;
     }
-  
+
     if (firstName.length < 2) {
-      this.toastComponent.showAdoptProfileError('Ungültiger Vorname');
+      this.toastComponent.showAdoptProfileError('Der Vorname muss mindestens 2 Zeichen lang sein.');
       return false;
     }
-  
+
     if (lastName.length < 2) {
-      this.toastComponent.showAdoptProfileError('Ungültiger Nachname');
+      this.toastComponent.showAdoptProfileError('Der Nachname muss mindestens 2 Zeichen lang sein.');
       return false;
     }
-  
+
     if (username.length < 2) {
-      this.toastComponent.showAdoptProfileError('Ungültiger Benutzername');
+      this.toastComponent.showAdoptProfileError('Der Benutzername muss mindestens 2 Zeichen lang sein.');
       return false;
     }
-  
+
     return true;
   }
+
   
 
   closeDialog() {
