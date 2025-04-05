@@ -13,6 +13,7 @@ export const environment = {
     ENDPOINT_SUBPROFILE: 'profile/sub-profile-list/',
 
     ENDPOINT_VIDEONAME: 'video/videoname/',
+    ENDPOINT_VIDEO: 'video/',
 
 
     QUERY_PARAM_PROFILE: '?profile=',

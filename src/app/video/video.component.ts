@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild } from '@angular/core';
 import Hls from 'hls.js';
+import { environment } from '../../environments/environment';
 
 
 
@@ -18,16 +19,13 @@ export class VideoComponent {
   @Input() type!: string;
 
 
-  videoUrl = 'http://127.0.0.1:8000/api/video/';
   isVideoLoaded = false;
 
 
   constructor() { }
 
   onVideoClick(): void {
-    const videoUrl = this.videoUrl + this.type + '/' + this.title;
-    console.log(videoUrl);
-
+    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.type + '/' + this.title;
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
         const hls = new Hls({
