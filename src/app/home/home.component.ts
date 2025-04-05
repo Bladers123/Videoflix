@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   videoTitles: string[] = [];
   responsiveOptions: any[] | undefined;
   selectedTitle: string = '';
+  videoType: string = '';
 
 
   constructor(
@@ -61,8 +62,9 @@ export class HomeComponent implements OnInit {
   }
   
 
-  onPoster(title: string) {
+  onPoster(title: string, type: string) {
     this.selectedTitle = title;
+    this.videoType = type;
     this.isVideoVisible = true;
   }
 

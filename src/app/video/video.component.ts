@@ -1,16 +1,21 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild } from '@angular/core';
 import Hls from 'hls.js';
+
+
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss']
 })
+
+
 export class VideoComponent {
 
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef<HTMLVideoElement>;
   @Output() close = new EventEmitter<void>();
   @Input() title!: string;
+  @Input() type!: string;
 
 
   videoUrl = 'http://127.0.0.1:8000/api/video/';
@@ -20,9 +25,9 @@ export class VideoComponent {
   constructor() { }
 
   onVideoClick(): void {
-    const videoUrl = this.videoUrl + this.title;
+    const videoUrl = this.videoUrl + this.type + '/' + this.title;
     console.log(videoUrl);
-    
+
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
         const hls = new Hls({

@@ -7,7 +7,7 @@
       <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
         [responsiveOptions]="responsiveOptions">
         <ng-template let-title #item>
-          <div (click)="onPoster(title)" class="m-2 p-2 shadow-md rounded">
+          <div (click)="onPoster(title, 'movie')" class="m-2 p-2 shadow-md rounded">
             <h3>{{ capitalizeTitle(title) }}</h3>
             <app-video-poster></app-video-poster>
           </div>
@@ -20,7 +20,7 @@
       <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
         [responsiveOptions]="responsiveOptions">
         <ng-template let-title #item>
-          <div (click)="onPoster(title)" class="m-2 p-2 shadow-md rounded">
+          <div (click)="onPoster(title, 'clip')" class="m-2 p-2 shadow-md rounded">
             <h3>{{ capitalizeTitle(title) }}</h3>
             <app-video-poster></app-video-poster>
           </div>
@@ -32,4 +32,4 @@
 </div>
 
 
-<app-video [title]="selectedTitle" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
+<app-video [title]="selectedTitle" [type]="videoType" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
