@@ -1,5 +1,5 @@
 <div class="top-level flex flex-column justify-content-center align-items-center h-full">
+    <h1>{{capitalizeTitle(title)}}</h1>
     <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-    <video #videoPlayer controls width="800" height="600" poster="img/play.png" (click)="onVideoClick()"
-        controls></video>
+    <video #videoPlayer controls width="1200" height="800" poster="img/play.png" (click)="onVideoClick()"></video>
 </div>

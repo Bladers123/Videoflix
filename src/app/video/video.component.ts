@@ -25,7 +25,7 @@ export class VideoComponent {
   constructor() { }
 
   onVideoClick(): void {
-    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.type + '/' + this.title;
+    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.type + '/' + this.title;    
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
         const hls = new Hls({
@@ -45,6 +45,11 @@ export class VideoComponent {
       }
       this.isVideoLoaded = true;
     }
+  }
+
+  capitalizeTitle(title: string): string {
+    const replaced = title.replace(/-/g, ' ');
+    return replaced.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
   closeDialog() {

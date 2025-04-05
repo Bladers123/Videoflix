@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { NavbarComponent } from "../shared/components/navbar/navbar.component";
-import { VideoPosterComponent } from '../video-poster/video-poster.component';
 import { VideoComponent } from "../video/video.component";
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
@@ -11,7 +10,7 @@ import { VideoService } from '../shared/services/video.service';
 
 @Component({
   selector: 'app-home',
-  imports: [NavbarComponent, VideoPosterComponent, VideoComponent, CommonModule, CarouselModule, ButtonModule],
+  imports: [NavbarComponent, VideoComponent, CommonModule, CarouselModule, ButtonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -20,7 +19,8 @@ import { VideoService } from '../shared/services/video.service';
 export class HomeComponent implements OnInit {
 
   isVideoVisible: boolean = false;
-  videoTitles: string[] = [];
+  movieTitles: string[] = [];
+  clipTitles: string[] = [];
   responsiveOptions: any[] | undefined;
   selectedTitle: string = '';
   videoType: string = '';
@@ -41,8 +41,9 @@ export class HomeComponent implements OnInit {
   }
 
   initVideoNames() {
-    this.videoService.getVideoNames().subscribe((response: any) => {
-      this.videoTitles = response.video_names;
+    this.videoService.getVideoNames().subscribe((response: any) => {      
+      this.movieTitles = response.movies;
+      this.clipTitles = response.clips;
     });
   }
 

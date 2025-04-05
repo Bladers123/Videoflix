@@ -1,15 +1,15 @@
 <app-navbar></app-navbar>
-<div class="top-level content">
+<div class="top-level mr-6 ml-6 mt-6">
 
 
     <div>
       <h2>Filme</h2>
-      <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
+      <p-carousel [value]="movieTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
         [responsiveOptions]="responsiveOptions">
         <ng-template let-title #item>
           <div (click)="onPoster(title, 'movie')" class="m-2 p-2 shadow-md rounded">
             <h3>{{ capitalizeTitle(title) }}</h3>
-            <app-video-poster></app-video-poster>
+            <img class="h-12rem w-18rem cursor-pointer" src="img/poster-movie.jpg" alt="poster">
           </div>
         </ng-template>
       </p-carousel>
@@ -17,12 +17,12 @@
 
     <div>
       <h2>Clips</h2>
-      <p-carousel [value]="videoTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
+      <p-carousel [value]="clipTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
         [responsiveOptions]="responsiveOptions">
         <ng-template let-title #item>
           <div (click)="onPoster(title, 'clip')" class="m-2 p-2 shadow-md rounded">
             <h3>{{ capitalizeTitle(title) }}</h3>
-            <app-video-poster></app-video-poster>
+            <img class="h-12rem w-18rem cursor-pointer" src="img/poster-clip.jpg" alt="poster">
           </div>
         </ng-template>
       </p-carousel>
