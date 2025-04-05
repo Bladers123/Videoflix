@@ -7,12 +7,14 @@ import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
 import { ChangeUserDataDialogComponent } from "./change-user-data-dialog/change-user-data-dialog.component";
 import { CommonModule } from '@angular/common';
+import { LegalNoticeComponent } from "../../../legal-notice/legal-notice.component";
+import { PrivacyPolicyComponent } from "../../../privacy-policy/privacy-policy.component";
 
 
 
 @Component({
     selector: 'app-navbar',
-    imports: [RouterModule, ButtonModule, Menu, ChangeUserDataDialogComponent, CommonModule],
+    imports: [RouterModule, ButtonModule, Menu, ChangeUserDataDialogComponent, CommonModule, LegalNoticeComponent, PrivacyPolicyComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss',
 })
@@ -23,6 +25,8 @@ export class NavbarComponent implements OnInit {
 
     items: MenuItem[] | undefined;
     changeProfileDataDialogVisible: boolean = false;
+    privacyPolicyVisible: boolean = false;
+    legalNoticeVisible: boolean = false;
 
 
     constructor(private authService: AuthService, private profileService: ProfileService) { }
@@ -51,6 +55,20 @@ export class NavbarComponent implements OnInit {
                         }
                     },
                     {
+                        label: 'Impressum',
+                        icon: PrimeIcons.HOME,
+                        command: () => {
+                            this.onLegalNotice();
+                        }
+                    },
+                    {
+                        label: 'Datenschutzerklärung',
+                        icon: PrimeIcons.BOOK,
+                        command: () => {
+                            this.onPrivacyPolicy();
+                        }
+                    },
+                    {
                         label: 'Ausloggen',
                         icon: PrimeIcons.SIGN_OUT,
                         command: () => {
@@ -60,6 +78,14 @@ export class NavbarComponent implements OnInit {
                 ]
             }
         ];
+    }
+
+
+    onPrivacyPolicy() {
+        this.privacyPolicyVisible = true;
+    }
+    onLegalNotice() {
+        this.legalNoticeVisible = true;
     }
 
     onChangeAccountData() {
@@ -74,9 +100,17 @@ export class NavbarComponent implements OnInit {
         this.authService.logout();
     }
 
-    onClosecCangeProfileDataDialog(){
+    onClosePrivacyPolicy() {
+        this.privacyPolicyVisible = false;
+    }
+
+    onCloseLegalNotice() {
+        this.legalNoticeVisible = false;
+    }
+
+    onClosecCangeProfileDataDialog() {
         this.changeProfileDataDialogVisible = false;
     }
-    
+
 
 }

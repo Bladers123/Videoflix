@@ -14,3 +14,7 @@
 
 <app-change-user-data-dialog *ngIf="changeProfileDataDialogVisible"
     (close)="onClosecCangeProfileDataDialog()"></app-change-user-data-dialog>
+
+<app-legal-notice *ngIf="legalNoticeVisible" (close)="onCloseLegalNotice()"></app-legal-notice>
+
+<app-privacy-policy *ngIf="privacyPolicyVisible" (close)="onClosePrivacyPolicy()"></app-privacy-policy>
