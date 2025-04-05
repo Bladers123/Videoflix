@@ -9,4 +9,11 @@ body {
     max-width: 1400px !important;
 }
 
-  
+.close {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.close:hover {
+    transform: scale(1.2);
+    filter: brightness(1.1);
+}
