@@ -38,13 +38,10 @@ export class VideoComponent {
         this.hls.attachMedia(this.videoPlayer.nativeElement);
         this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
           this.hls?.startLoad();
-          // Sicherheitshalber prüfen, ob nativeElement existiert
           if (this.videoPlayer && this.videoPlayer.nativeElement) {
             this.videoPlayer.nativeElement.play();
           }
-          // Speichern der verfügbaren Qualitätsstufen für die UI
           this.availableLevels = this.hls?.levels || [];
-          console.log('Verfügbare Qualitätsstufen:', this.availableLevels);
         });
       } else if (this.videoPlayer.nativeElement.canPlayType('application/vnd.apple.mpegurl')) {
         this.videoPlayer.nativeElement.src = videoUrl;
@@ -56,13 +53,10 @@ export class VideoComponent {
     }
   }
 
-  // Methode zum manuellen Wechseln der Qualitätsstufe
   changeQuality(selectedIndex: string): void {
     const index = parseInt(selectedIndex, 10);
     if (this.hls) {
-      // -1 = Automatische Auswahl
       this.hls.currentLevel = index;
-      console.log('Geänderte Qualitätsstufe auf:', index);
     }
   }
 

@@ -18,21 +18,14 @@ import { ToastComponent } from '../../shared/components/toast/toast.component';
 })
 
 
-
 export class RecoveryPasswordDialogComponent {
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
   @Output() close = new EventEmitter<void>();
 
   isSending: boolean = false;
-
-
   email: string = '';
 
-
-
   constructor(private authService: AuthService) { }
-
-
 
   requestRecoverPassword() {
     if (this.email !== '') {

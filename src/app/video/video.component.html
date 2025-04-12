@@ -3,10 +3,8 @@
     <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer hover:transition-ease-in" src="img/close.png" alt="close">
     <video #videoPlayer controls width="1200" height="800" poster="img/play.png" (click)="onVideoClick()"></video>
   
-    <!-- Dropdown für die Qualitätsauswahl, nur sichtbar, wenn Qualitätsstufen vorhanden sind -->
     <div *ngIf="availableLevels.length > 0" class="quality-selector mt-2">
       <label for="quality-select">Qualität wählen:</label>
-      <!-- Hier wird ein Template-Referenz-Variable 'qualitySelect' erstellt -->
       <select #qualitySelect id="quality-select" (change)="changeQuality(qualitySelect.value)">
         <option value="-1">Auto</option>
         <option *ngFor="let level of availableLevels; index as i" [value]="i">
