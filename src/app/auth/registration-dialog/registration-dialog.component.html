@@ -1,9 +1,9 @@
 <!-- registration-dialog.component.html -->
 <div class="top-level flex flex-column justify-content-center align-items-center h-full">
     <div
-        class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-5 border-round relative p-5 border-round-lg">
+        class="content-responsive dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-5 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-        <span class="text-5xl w-11 text-center">Registrieren</span>
+        <span class="header text-5xl w-11 text-center">Registrieren</span>
 
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input" [(ngModel)]="username"

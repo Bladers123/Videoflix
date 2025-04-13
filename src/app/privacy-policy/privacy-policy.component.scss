@@ -41,3 +41,18 @@
   
   
   
+  @media screen and (max-width: 800px) {
+    .content-responsive {
+      width: 90% !important;
+    }
+
+    .header{
+      font-size: 24px;
+    }
+  }
+  
+  @media screen and (max-height: 900px) {  
+    .content-responsive {
+      height: 91vh !important;
+    }
+  }  

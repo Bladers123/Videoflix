@@ -1,2 +1,16 @@
+@media screen and (max-width: 500px) {
+    .poster-responsive {
+         width: 14rem !important;
+    }
 
+    .content-responsive {
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+}
 
+@media screen and (max-width: 350px) {
+    .poster-responsive {
+         width: 10rem !important;
+    }
+}

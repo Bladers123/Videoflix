@@ -1,9 +1,9 @@
 <!-- recover-password-dialog.component.html -->
 <div class="flex flex-column justify-content-center align-items-center h-full">
     <div
-        class="dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-6 border-round relative p-5 border-round-lg">
+        class="content-responsive min-width-40 dialog-content flex justify-content-center align-items-center flex-column w-5 height-55vh gap-6 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-        <span class="text-5xl">Profile bearbeiten</span>
+        <span class="text-5xl header">Profile bearbeiten</span>
         <span class="text-center">Wählen Sie Ihr Profil aus, das Sie ändern oder löschen möchten.</span>
 
         <p-autocomplete [(ngModel)]="selectedProfile" [dropdown]="true" [suggestions]="subProfiles"

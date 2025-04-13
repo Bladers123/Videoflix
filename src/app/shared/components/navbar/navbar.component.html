@@ -5,8 +5,8 @@
         </div>
 
         <div class="card flex justify-center">
-            <p-menu #menu [model]="items" [popup]="true" />
-            <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" />
+            <p-menu #menu [model]="items" [popup]="true" [appendTo]="'body'"></p-menu>
+            <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></p-button>
         </div>
     </div>
 </div>

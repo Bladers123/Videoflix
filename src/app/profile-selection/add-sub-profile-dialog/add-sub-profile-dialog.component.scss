@@ -29,3 +29,16 @@
     top: 10px;
     right: 10px;
   }
+
+  @media screen and (max-width: 830px) {
+    .content-responsive {
+      overflow-y: scroll;
+      width: 91vw !important;
+    }
+  }
+  
+  @media screen and (max-height: 900px) {  
+    .content-responsive {
+      height: 91vh !important;
+    }
+  }

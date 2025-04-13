@@ -10,6 +10,11 @@
     height: 47vh;
 }
 
+.min-width-40 {
+    min-width: 41% !important;
+}
+
+
 .background-of-card {
     background-color: rgba(0, 0, 0, 0.8);
     box-shadow: 0 2px 8px rgb(233 158 158 / 90%);
@@ -25,4 +30,11 @@
 .p-floatlabel:has(textarea:focus) label,
 .p-floatlabel:has(.p-inputwrapper-focus) label {
     color: inherit !important;
+}
+
+
+@media screen and (max-height: 900px) {
+    .content-responsive {
+        height: 91vh;
+    }
 }

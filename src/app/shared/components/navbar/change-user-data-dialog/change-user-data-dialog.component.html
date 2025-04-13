@@ -1,8 +1,8 @@
 <div class="top-level flex flex-column justify-content-center align-items-center h-full">
     <div
-        class="dialog-content flex justify-content-center align-items-center flex-column w-8 gap-6 border-round relative p-5 border-round-lg">
+        class="content-responsive dialog-content flex justify-content-center align-items-center flex-column w-8 gap-6 border-round relative p-5 border-round-lg">
         <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer" src="img/close.png" alt="close">
-        <span class="text-5xl">Accountdaten</span>
+        <span class="text-5xl header">Accountdaten</span>
         <img class="w-2 border-circle" [src]="imageSrc" alt="">
         
         <p-fileupload mode="basic" name="demo[]" chooseIcon="pi pi-upload" accept="image/*" maxFileSize="1000000" (onSelect)="onSelectImage($event)" [auto]="true" chooseLabel="Bild auswählen" />
