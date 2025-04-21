@@ -7,6 +7,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { VideoService } from '../shared/services/video.service';
 import { Video } from '../shared/interfaces/video.interface';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 
 @Component({
@@ -20,44 +21,37 @@ import { Video } from '../shared/interfaces/video.interface';
 export class HomeComponent implements OnInit {
 
   isVideoVisible: boolean = false;
-  movieTitles: string[] = [];
-  clipTitles: string[] = [];
   responsiveOptions: any[] | undefined;
-  // selectedTitle: string = '';
-  //  videoType: string = '';
-  favoriteTitles: string[] = [];
+  currentSubProfileId: string = '';
+
 
   videos: Video[] = [];
-// statt movieTitles/clipTitles
-movies: Video[] = [];
-clips: Video[]  = [];
-// selectedVideo statt selectedTitle + videoType
-selectedVideo!: Video;
+  movies: Video[] = [];
+  clips: Video[] = [];
+  favoriteVideos: Video[] = [];
+  selectedVideo!: Video;
 
-  constructor(
-    private authService: AuthService,
-    private videoService: VideoService
-  ) { }
+  constructor(private authService: AuthService, private videoService: VideoService, private localStorageService: LocalStorageService) { }
+
 
   ngOnInit(): void {
+    const currentSubProfileId = this.localStorageService.getItem<string>('currentSubProfil');
     this.authService.verifyUser().subscribe(isVerified => {
-      if (isVerified) {
-        // this.initFavorites();
+      if (isVerified && currentSubProfileId) {
+        this.currentSubProfileId = currentSubProfileId;
         this.initVideos();
+        this.initFavorites();
         this.initResponsiveOptions();
       }
     });
   }
 
-
-
   initVideos() {
     this.videoService.getVideos()
       .subscribe((videos: Video[]) => {
         this.videos = videos;
-        console.log(videos);
-      this.movies = videos.filter(v => v.video_type === 'movie');
-      this.clips  = videos.filter(v => v.video_type === 'clip');
+        this.movies = videos.filter(v => v.video_type === 'movie');
+        this.clips = videos.filter(v => v.video_type === 'clip');
       });
   }
 
@@ -86,13 +80,12 @@ selectedVideo!: Video;
     this.isVideoVisible = false;
   }
 
-  // initFavorites() {
-  //   // Falls dein GET-Aufruf über getFavoriteVideos() implementiert ist:
-  //   this.videoService.getFavoriteVideos(this.currentSubProfileId).subscribe((response: any) => {
-  //     // Angenommen, response ist ein Array von Videos, extrahiere die Titel:
-  //     this.favoriteTitles = response.map((video: any) => video.title);
-  //   });
-  // }
+  initFavorites() {
+    this.videoService.getFavoriteVideosBySubProfileId(this.currentSubProfileId).subscribe((favoriteIds: string[]) => {
+      this.favoriteVideos = this.videos.filter(video => favoriteIds.includes(video.id))
+    });
+  }
+
 
 
 }

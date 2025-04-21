@@ -26,12 +26,14 @@ export class VideoComponent {
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef<HTMLVideoElement>;
   @Output() close = new EventEmitter<void>();
   @Input() video!: Video;
+  @Input() currentSubProfileId: string = '';
 
   isVideoLoaded = false;
   availableLevels: any[] = [];
   hls: Hls | null = null;
 
-  constructor(private videoService: VideoService, private localStorageService: LocalStorageService) { }
+  constructor(private videoService: VideoService, private localStorageService: LocalStorageService) {
+  }
 
   onVideoClick(): void {
     const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
@@ -77,12 +79,8 @@ export class VideoComponent {
   }
 
   onFavourite() {
-    const currentSubProfileId = this.localStorageService.getItem('currentSubProfil');
-    console.log("Sub Profil: ", currentSubProfileId);
-
-
-    // this.videoService.addFavoriteVideo(currentSubProfileId, this.title).subscribe((response: any) => {
-    //   console.log(response);
-    // });
+    this.videoService.addFavoriteVideo(this.currentSubProfileId, this.video.id).subscribe((response: any) => {
+      console.log(response);
+    });
   }
 }

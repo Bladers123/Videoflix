@@ -98,16 +98,21 @@ export class RestClientService {
     return this.httpClient.patch(environment.BASE_URL + environment.ENDPOINT_PROFILE + id + '/', formData, { headers });
   }
 
-
   getVideos(): Observable<Video[]> {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.get<Video[]>(environment.BASE_URL + environment.ENDPOINT_VIDEO + environment.ENDPOINT_VIDEO_LIST, { headers });
   }
 
-
-  postFavoriteVideo(subprofileId: number, videoName: string): Observable<any> {
+  getFavoriteVideosBySubProfileId(currentSubProfileId: string): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
-    const url = environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subprofileId + '/add-favorite/';
-    return this.httpClient.post(url, { video_id: videoName }, { headers });
+    return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + currentSubProfileId + '/favorite-video-ids/', { headers });
+  }
+
+  postFavoriteVideo(subprofileId: number, video_id: string): Observable<any> {
+    console.log("Subprofilid: ", subprofileId);
+    console.log("Video ID: ", video_id);
+    
+    const headers = this.getAuthorizationTokenHeader();
+    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subprofileId + '/add-favorite/', { video_id }, { headers });
   }
 }

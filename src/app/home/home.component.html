@@ -31,7 +31,7 @@
 
   <div>
     <h2>Favoriten</h2>
-    <p-carousel [value]="movies" [numVisible]="4" [numScroll]="4" [circular]="false"
+    <p-carousel [value]="favoriteVideos" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
@@ -46,4 +46,4 @@
 </div>
 
 
-<app-video [video]="selectedVideo" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
+<app-video [video]="selectedVideo" [currentSubProfileId]="currentSubProfileId" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>

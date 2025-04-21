@@ -14,8 +14,8 @@ export class VideoService {
   constructor(private restClientService: RestClientService) { }
 
 
-  addFavoriteVideo(subprofileId: any, videoName: string): Observable<any> {
-    return this.restClientService.postFavoriteVideo(subprofileId, videoName).pipe(
+  addFavoriteVideo(subprofileId: any, videoId: string): Observable<any> {
+    return this.restClientService.postFavoriteVideo(subprofileId, videoId).pipe(
       catchError(err => {
         const errorMessages = this.extractErrorMessages(err.error);
         return throwError(() => new Error(errorMessages));
@@ -26,6 +26,15 @@ export class VideoService {
   getVideos(): Observable<Video[]> {
     return this.restClientService.getVideos().pipe(
       map((response: Video[]) => response || []),
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    );
+  }
+
+  getFavoriteVideosBySubProfileId(currentSubProfileId: string): Observable<any>{
+    return this.restClientService.getFavoriteVideosBySubProfileId(currentSubProfileId).pipe(
       catchError(err => {
         const errorMessages = this.extractErrorMessages(err.error);
         return throwError(() => new Error(errorMessages));
