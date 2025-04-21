@@ -46,4 +46,5 @@
 </div>
 
 
-<app-video [video]="selectedVideo" [currentSubProfileId]="currentSubProfileId" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
+<app-video [isFavorited]="selectedVideoFavorited" (favoriteToggled)="onFavoriteToggled($event)" [video]="selectedVideo"
+  [currentSubProfileId]="currentSubProfileId" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>

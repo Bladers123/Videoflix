@@ -3,8 +3,6 @@ import Hls from 'hls.js';
 import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../shared/services/video.service';
-import { AuthService } from '../shared/services/auth.service';
-import { SubProfileService } from '../shared/services/sub-profile.service';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 import { Video } from '../shared/interfaces/video.interface';
 
@@ -28,19 +26,16 @@ export class VideoComponent {
   @Input() video!: Video;
   @Input() currentSubProfileId: string = '';
 
-  @Output() favoriteToggled = new EventEmitter<{   
-    videoId: number;
-    favorited: boolean;
-  }>();
+  @Output() favoriteToggled = new EventEmitter<{ videoId: number; favorited: boolean }>();
 
   isLoadingFav = false;  
-  @Input() isFavorited = false;                     // neu
+  @Input() isFavorited = false;                    
 
   isVideoLoaded = false;
   availableLevels: any[] = [];
   hls: Hls | null = null;
 
-  constructor(private videoService: VideoService, private localStorageService: LocalStorageService) {
+  constructor(private videoService: VideoService) {
   }
 
   onVideoClick(): void {
@@ -99,7 +94,6 @@ export class VideoComponent {
           
         },
         error: () => {
-          // optional: Fehler-Toast
           this.isLoadingFav = false;
         }
       });

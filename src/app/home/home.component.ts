@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   isVideoVisible: boolean = false;
   responsiveOptions: any[] | undefined;
   currentSubProfileId: string = '';
+  selectedVideoFavorited = false;  
 
 
   videos: Video[] = [];
@@ -40,7 +41,6 @@ export class HomeComponent implements OnInit {
       if (isVerified && currentSubProfileId) {
         this.currentSubProfileId = currentSubProfileId;
         this.initVideos();
-        this.initFavorites();
         this.initResponsiveOptions();
       }
     });
@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
         this.videos = videos;
         this.movies = videos.filter(v => v.video_type === 'movie');
         this.clips = videos.filter(v => v.video_type === 'clip');
+        this.initFavorites();
       });
   }
 
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit {
 
   onPoster(video: Video) {
     this.selectedVideo = video;
+    this.selectedVideoFavorited = this.favoriteVideos.some(v => v.id === video.id);
     this.isVideoVisible = true;
   }
 
@@ -86,6 +88,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
+  onFavoriteToggled(event: { videoId: number; favorited: boolean }) {
+    this.initFavorites();
+  }
 
 }
