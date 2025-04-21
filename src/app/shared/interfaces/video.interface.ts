@@ -5,6 +5,6 @@ export interface Video {
     video_file?: File
     thumbnail?: File
     file_size?: string
-    uploadet_at: string
+    uploaded_at: string
     video_type: string
 }

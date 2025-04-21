@@ -1,16 +1,25 @@
-<div class="top-level flex flex-column justify-content-center align-items-center h-full">
-  <h1>{{ capitalizeTitle(video.title) }}</h1>
-  <p>{{video.description}}</p>
-  <p>{{video.uploadet_at}}</p>
-  <Button class="cursor-pointer" [disabled]="isLoadingFav" (click)="onFavourite()">
-    {{ isFavorited ? 'Entfernen' : 'Meinen Favoriten hinzufügen' }}
-  </Button>
+<div class="top-level flex flex-column justify-content-center align-items-center h-full overflow-scroll p-8">
+  
+  <div class="flex flex-column w-4 align-self-start mt-8 mb-8 ml-8 mr-8 bg-grey-300 border-round shadow-4">
+    <h1 class="text-6xl">Titel: {{ capitalizeTitle(video.title) }}</h1>
+    <span class="text-3xl underline">Beschreibung:</span>
+    <p class="text-2xl">{{video.description}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda, impedit minus amet ullam hic quas quisquam sequi quidem aliquam magnam architecto, ut ad ipsam sit! Quasi in cum debitis quas.</p>
+    <p class="text-1xl">Hochgeladen am: {{video.uploaded_at | date: 'dd/MM/yyyy'}}</p>
+    <div (click)="onFavourite()" class="cursor-pointer flex align-items-center">
+      <img [src]="isFavorited ? 'img/like.png' : 'img/no-like.png'" alt="like-img">
+      <span class="text-2xl"> {{ isFavorited ? 'Aus Liste entfernen' : 'Meiner Liste hinzufügen' }} </span>
+    </div>
+  </div>
+
+
+
   <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer hover:transition-ease-in" src="img/close.png"
     alt="close">
-  <video #videoPlayer controls width="1200" height="800" poster="img/play.png" (click)="onVideoClick()"></video>
+  <video class="max-w-full max-h-[80vh]" #videoPlayer controls width="1200" height="800" poster="img/play.png"
+    (click)="onVideoClick()"></video>
 
-  <div *ngIf="availableLevels.length > 0" class="quality-selector mt-2">
-    <label for="quality-select">Qualität wählen:</label>
+  <div *ngIf="availableLevels.length > 0" class="quality-selector mt-5">
+    <label class="text-2xl" for="quality-select">Qualität wählen: </label>
     <select #qualitySelect id="quality-select" (change)="changeQuality(qualitySelect.value)">
       <option value="-1">Auto</option>
       <option *ngFor="let level of availableLevels; index as i" [value]="i">

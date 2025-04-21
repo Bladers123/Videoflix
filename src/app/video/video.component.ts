@@ -35,10 +35,10 @@ export class VideoComponent {
   availableLevels: any[] = [];
   hls: Hls | null = null;
 
-  constructor(private videoService: VideoService) {
-  }
+  constructor(private videoService: VideoService) {  }
 
   onVideoClick(): void {
+    console.log(this.video);
     const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
