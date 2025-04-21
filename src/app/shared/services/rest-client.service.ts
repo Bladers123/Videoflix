@@ -108,11 +108,8 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + currentSubProfileId + '/favorite-video-ids/', { headers });
   }
 
-  postFavoriteVideo(subprofileId: number, video_id: string): Observable<any> {
-    console.log("Subprofilid: ", subprofileId);
-    console.log("Video ID: ", video_id);
-    
+  postToggleFavoriteVideo(subProfileId: string, videoId: number): Observable<{ video_id: number; favorited: boolean }> {
     const headers = this.getAuthorizationTokenHeader();
-    return this.httpClient.post(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subprofileId + '/add-favorite/', { video_id }, { headers });
+    return this.httpClient.post<{ video_id: number; favorited: boolean }>(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subProfileId + "/add-favorite/", { video_id: videoId }, { headers });
   }
 }

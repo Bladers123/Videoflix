@@ -28,6 +28,14 @@ export class VideoComponent {
   @Input() video!: Video;
   @Input() currentSubProfileId: string = '';
 
+  @Output() favoriteToggled = new EventEmitter<{   
+    videoId: number;
+    favorited: boolean;
+  }>();
+
+  isLoadingFav = false;  
+  @Input() isFavorited = false;                     // neu
+
   isVideoLoaded = false;
   availableLevels: any[] = [];
   hls: Hls | null = null;
@@ -79,8 +87,21 @@ export class VideoComponent {
   }
 
   onFavourite() {
-    this.videoService.addFavoriteVideo(this.currentSubProfileId, this.video.id).subscribe((response: any) => {
-      console.log(response);
-    });
+    if (this.isLoadingFav) 
+      return;
+    this.isLoadingFav = true;
+    this.videoService.toggleFavoriteVideo(this.currentSubProfileId, parseInt(this.video.id)).subscribe({
+        next: res => {
+          this.isFavorited = res.favorited;
+          this.favoriteToggled.emit({ videoId: res.video_id, favorited: res.favorited });
+          this.isLoadingFav = false;
+          console.log(this.isFavorited);
+          
+        },
+        error: () => {
+          // optional: Fehler-Toast
+          this.isLoadingFav = false;
+        }
+      });
   }
 }

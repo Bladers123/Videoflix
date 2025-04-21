@@ -14,8 +14,8 @@ export class VideoService {
   constructor(private restClientService: RestClientService) { }
 
 
-  addFavoriteVideo(subprofileId: any, videoId: string): Observable<any> {
-    return this.restClientService.postFavoriteVideo(subprofileId, videoId).pipe(
+  toggleFavoriteVideo(subprofileId: string, videoId: number): Observable<any> {
+    return this.restClientService.postToggleFavoriteVideo(subprofileId, videoId).pipe(
       catchError(err => {
         const errorMessages = this.extractErrorMessages(err.error);
         return throwError(() => new Error(errorMessages));
