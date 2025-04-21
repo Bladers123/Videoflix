@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { VideoService } from '../shared/services/video.service';
+import { Video } from '../shared/interfaces/video.interface';
 
 
 @Component({
@@ -22,9 +23,16 @@ export class HomeComponent implements OnInit {
   movieTitles: string[] = [];
   clipTitles: string[] = [];
   responsiveOptions: any[] | undefined;
-  selectedTitle: string = '';
-  videoType: string = '';
+  // selectedTitle: string = '';
+  //  videoType: string = '';
+  favoriteTitles: string[] = [];
 
+  videos: Video[] = [];
+// statt movieTitles/clipTitles
+movies: Video[] = [];
+clips: Video[]  = [];
+// selectedVideo statt selectedTitle + videoType
+selectedVideo!: Video;
 
   constructor(
     private authService: AuthService,
@@ -34,17 +42,23 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.authService.verifyUser().subscribe(isVerified => {
       if (isVerified) {
-        this.initVideoNames();
+        // this.initFavorites();
+        this.initVideos();
         this.initResponsiveOptions();
       }
     });
   }
 
-  initVideoNames() {
-    this.videoService.getVideoNames().subscribe((response: any) => {      
-      this.movieTitles = response.movies;
-      this.clipTitles = response.clips;
-    });
+
+
+  initVideos() {
+    this.videoService.getVideos()
+      .subscribe((videos: Video[]) => {
+        this.videos = videos;
+        console.log(videos);
+      this.movies = videos.filter(v => v.video_type === 'movie');
+      this.clips  = videos.filter(v => v.video_type === 'clip');
+      });
   }
 
 
@@ -61,15 +75,24 @@ export class HomeComponent implements OnInit {
     const replaced = title.replace(/-/g, ' ');
     return replaced.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
-  
 
-  onPoster(title: string, type: string) {
-    this.selectedTitle = title;
-    this.videoType = type;
+
+  onPoster(video: Video) {
+    this.selectedVideo = video;
     this.isVideoVisible = true;
   }
 
   onClosePoster() {
     this.isVideoVisible = false;
   }
+
+  // initFavorites() {
+  //   // Falls dein GET-Aufruf über getFavoriteVideos() implementiert ist:
+  //   this.videoService.getFavoriteVideos(this.currentSubProfileId).subscribe((response: any) => {
+  //     // Angenommen, response ist ein Array von Videos, extrahiere die Titel:
+  //     this.favoriteTitles = response.map((video: any) => video.title);
+  //   });
+  // }
+
+
 }

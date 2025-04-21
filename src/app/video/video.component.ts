@@ -2,6 +2,11 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import Hls from 'hls.js';
 import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
+import { VideoService } from '../shared/services/video.service';
+import { AuthService } from '../shared/services/auth.service';
+import { SubProfileService } from '../shared/services/sub-profile.service';
+import { LocalStorageService } from '../shared/services/local-storage.service';
+import { Video } from '../shared/interfaces/video.interface';
 
 
 
@@ -20,17 +25,16 @@ export class VideoComponent {
 
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef<HTMLVideoElement>;
   @Output() close = new EventEmitter<void>();
-  @Input() title!: string;
-  @Input() type!: string;
+  @Input() video!: Video;
 
   isVideoLoaded = false;
   availableLevels: any[] = [];
   hls: Hls | null = null;
 
-  constructor() { }
+  constructor(private videoService: VideoService, private localStorageService: LocalStorageService) { }
 
   onVideoClick(): void {
-    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.type + '/' + this.title;
+    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
         this.hls = new Hls({ autoStartLoad: false });
@@ -70,5 +74,15 @@ export class VideoComponent {
 
   closeDialog(): void {
     this.close.emit();
+  }
+
+  onFavourite() {
+    const currentSubProfileId = this.localStorageService.getItem('currentSubProfil');
+    console.log("Sub Profil: ", currentSubProfileId);
+
+
+    // this.videoService.addFavoriteVideo(currentSubProfileId, this.title).subscribe((response: any) => {
+    //   console.log(response);
+    // });
   }
 }

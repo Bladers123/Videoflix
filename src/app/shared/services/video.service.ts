@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RestClientService } from "./rest-client.service";
 import { catchError, map, Observable, throwError } from "rxjs";
+import { Video } from "../interfaces/video.interface";
 
 
 @Injectable({
@@ -13,9 +14,18 @@ export class VideoService {
   constructor(private restClientService: RestClientService) { }
 
 
-  getVideoNames(): Observable<string[]> {
-    return this.restClientService.getVideoNames().pipe(
-      map((response: string[]) => response || []),
+  addFavoriteVideo(subprofileId: any, videoName: string): Observable<any> {
+    return this.restClientService.postFavoriteVideo(subprofileId, videoName).pipe(
+      catchError(err => {
+        const errorMessages = this.extractErrorMessages(err.error);
+        return throwError(() => new Error(errorMessages));
+      })
+    );
+  }
+
+  getVideos(): Observable<Video[]> {
+    return this.restClientService.getVideos().pipe(
+      map((response: Video[]) => response || []),
       catchError(err => {
         const errorMessages = this.extractErrorMessages(err.error);
         return throwError(() => new Error(errorMessages));

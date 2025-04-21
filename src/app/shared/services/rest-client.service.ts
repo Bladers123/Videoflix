@@ -11,6 +11,7 @@ import { LocalStorageService } from './local-storage.service';
 import { User } from '../interfaces/user.interface';
 import { SubProfile } from '../interfaces/sub-profile.interace';
 import { Profile } from '../interfaces/profile.interface';
+import { Video } from '../interfaces/video.interface';
 
 
 
@@ -52,7 +53,7 @@ export class RestClientService {
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_VERIFY, { headers });
   }
 
-  getUser(): Observable<any>{
+  getUser(): Observable<any> {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.get(environment.BASE_URL + environment.ENDPOINT_USER, { headers });
   }
@@ -97,11 +98,16 @@ export class RestClientService {
     return this.httpClient.patch(environment.BASE_URL + environment.ENDPOINT_PROFILE + id + '/', formData, { headers });
   }
 
-  getVideoNames(): Observable<string[]> {
+
+  getVideos(): Observable<Video[]> {
     const headers = this.getAuthorizationTokenHeader();
-    return this.httpClient.get<string[]>(environment.BASE_URL + environment.ENDPOINT_VIDEONAME, { headers });
+    return this.httpClient.get<Video[]>(environment.BASE_URL + environment.ENDPOINT_VIDEO + environment.ENDPOINT_VIDEO_LIST, { headers });
   }
 
-  
-  
+
+  postFavoriteVideo(subprofileId: number, videoName: string): Observable<any> {
+    const headers = this.getAuthorizationTokenHeader();
+    const url = environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subprofileId + '/add-favorite/';
+    return this.httpClient.post(url, { video_id: videoName }, { headers });
+  }
 }

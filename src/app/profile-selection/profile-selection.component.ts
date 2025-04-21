@@ -13,6 +13,7 @@ import { Profile } from '../shared/interfaces/profile.interface';
 import { filter, take } from 'rxjs';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class ProfileSelectionComponent implements OnInit {
     phone: ''
   };
 
-  constructor(private authService: AuthService, private profileService: ProfileService, private subProfileService: SubProfileService, private router: Router) { }
+  constructor(private authService: AuthService, private profileService: ProfileService, private subProfileService: SubProfileService, private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.authService.verifyUser().subscribe(isVerified => {
@@ -116,6 +117,7 @@ export class ProfileSelectionComponent implements OnInit {
   }
 
   navigateToHome(id: string) {
+    this.localStorageService.setItem('currentSubProfil', id);
     this.router.navigate(['/home', id]);
   }
 

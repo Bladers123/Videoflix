@@ -5,6 +5,7 @@ import { Profile } from "../interfaces/profile.interface";
 import { SubProfile } from "../interfaces/sub-profile.interace";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
+import { LocalStorageService } from "./local-storage.service";
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class ProfileService {
   profile$ = this.profileSubject.asObservable();
 
 
-  constructor(private restClientService: RestClientService, private router: Router) { }
+  constructor(private restClientService: RestClientService, private router: Router, private localStorageService: LocalStorageService) { }
 
 
   getProfileById(id: string): Observable<Profile | null> {
@@ -42,6 +43,7 @@ export class ProfileService {
   }
 
   changeProfile() {
+    this.localStorageService.removeItem('currentSubProfil');
     this.router.navigate(['/profile-selection']);
   }
 

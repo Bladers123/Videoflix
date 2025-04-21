@@ -1,5 +1,8 @@
 <div class="top-level flex flex-column justify-content-center align-items-center h-full">
-    <h1>{{ capitalizeTitle(title) }}</h1>
+    <h1>{{ capitalizeTitle(video.title) }}</h1>
+    <p>{{video.description}}</p>
+    <p>{{video.uploadet_at}}</p>
+    <Button class="cursor-pointer" (click)="onFavourite()">Favorisieren</Button>
     <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer hover:transition-ease-in" src="img/close.png" alt="close">
     <video #videoPlayer controls width="1200" height="800" poster="img/play.png" (click)="onVideoClick()"></video>
   

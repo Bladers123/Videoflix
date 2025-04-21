@@ -102,6 +102,7 @@ export class AuthService {
 
   logout() {
     this.localStorageService.removeItem('user');
+    this.localStorageService.removeItem('currentSubProfil');
     this.user = undefined;
     this.router.navigate(['/auth']);
   }

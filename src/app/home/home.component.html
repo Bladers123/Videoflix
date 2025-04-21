@@ -1,33 +1,49 @@
 <app-navbar></app-navbar>
 <div class="top-level mr-6 ml-6 mt-6 content-responsive">
 
-    <div>
-      <h2>Filme</h2>
-      <p-carousel [value]="movieTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
-        [responsiveOptions]="responsiveOptions">
-        <ng-template let-title #item>
-          <div (click)="onPoster(title, 'movie')" class="m-2 p-2 shadow-md rounded">
-            <h3>{{ capitalizeTitle(title) }}</h3>
-            <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200" src="img/poster-movie.jpg" alt="poster">
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
+  <div>
+    <h2>Filme</h2>
+    <p-carousel [value]="movies" [numVisible]="4" [numScroll]="4" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-video #item>
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+          <h3>{{ capitalizeTitle(video.title) }}</h3>
+          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200" src="img/poster-movie.jpg"
+            alt="poster">
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
 
-    <div>
-      <h2>Clips</h2>
-      <p-carousel [value]="clipTitles" [numVisible]="4" [numScroll]="4" [circular]="false"
-        [responsiveOptions]="responsiveOptions">
-        <ng-template let-title #item>
-          <div (click)="onPoster(title, 'clip')" class="m-2 p-2 shadow-md rounded">
-            <h3>{{ capitalizeTitle(title) }}</h3>
-            <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200" src="img/poster-clip.jpg" alt="poster">
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
+  <div>
+    <h2>Clips</h2>
+    <p-carousel [value]="clips" [numVisible]="4" [numScroll]="4" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-video #item>
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+          <h3>{{ capitalizeTitle(video.title) }}</h3>
+          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200" src="img/poster-clip.jpg"
+            alt="poster">
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div>
+    <h2>Favoriten</h2>
+    <p-carousel [value]="movies" [numVisible]="4" [numScroll]="4" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-video #item>
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+          <h3>{{ capitalizeTitle(video.title) }}</h3>
+          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200"
+            src="img/poster-favourite.png" alt="poster">
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
 
 </div>
 
 
-<app-video [title]="selectedTitle" [type]="videoType" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
+<app-video [video]="selectedVideo" (close)="onClosePoster()" *ngIf="isVideoVisible"></app-video>
