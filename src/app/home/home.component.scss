@@ -1,8 +1,10 @@
-
+.border-style {
+    box-shadow: 0 2px 8px rgb(233 158 158 / 90%);
+}
 
 @media screen and (max-width: 500px) {
     .poster-responsive {
-         width: 14rem !important;
+        width: 14rem !important;
     }
 
     .content-responsive {
@@ -13,6 +15,6 @@
 
 @media screen and (max-width: 350px) {
     .poster-responsive {
-         width: 10rem !important;
+        width: 10rem !important;
     }
 }
