@@ -38,7 +38,6 @@ export class VideoComponent {
   constructor(private videoService: VideoService) {  }
 
   onVideoClick(): void {
-    console.log(this.video);
     const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
@@ -89,9 +88,7 @@ export class VideoComponent {
         next: res => {
           this.isFavorited = res.favorited;
           this.favoriteToggled.emit({ videoId: res.video_id, favorited: res.favorited });
-          this.isLoadingFav = false;
-          console.log(this.isFavorited);
-          
+          this.isLoadingFav = false;          
         },
         error: () => {
           this.isLoadingFav = false;
