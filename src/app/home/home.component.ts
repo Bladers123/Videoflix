@@ -49,7 +49,9 @@ export class HomeComponent implements OnInit {
   initVideos() {
     this.videoService.getVideos()
       .subscribe((videos: Video[]) => {
-        this.videos = videos;
+        this.videos = videos.sort((a, b) => {
+          return new Date(b.uploaded_at).getTime() + new Date(a.uploaded_at).getTime();
+        });
         this.movies = videos.filter(v => v.video_type === 'movie');
         this.clips = videos.filter(v => v.video_type === 'clip');
         this.initFavorites();

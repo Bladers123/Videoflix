@@ -39,7 +39,7 @@ export class RecoveryPasswordDialogComponent {
           setTimeout(() => { 
             this.isSending = false;
           }, 2000);
-          await this.toastComponent.showRequestRecoveryPasswordError(error);
+           await this.toastComponent.showRequestRecoveryPasswordError(error);
         }
       });
     }
