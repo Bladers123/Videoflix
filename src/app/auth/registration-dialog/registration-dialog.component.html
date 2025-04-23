@@ -53,7 +53,7 @@
             <label class="w-full" for="phone-input">Telefonnummer</label>
         </p-floatlabel>
 
-        <button (click)="registerUser()" [disabled]="isRegistered" class="p-3 w-11 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Registrieren</button>
+        <button (click)="registerUser()" [disabled]="isRegistered || !isFormValid"  class="p-3 w-11 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Registrieren</button>
     </div>
    <app-toast></app-toast>
 </div>

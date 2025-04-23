@@ -24,6 +24,7 @@ export class RegistrationDialogComponent {
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
   isRegistered: boolean = false;
+  disabledRegister: boolean = true;
 
   password: string = '';
   email: string = '';
@@ -67,9 +68,24 @@ export class RegistrationDialogComponent {
 
   }
 
+  get isFormValid(): boolean {
+    return (
+      this.email.trim() !== '' &&
+      this.username.trim() !== '' &&
+      this.password.trim() !== '' &&
+      this.repeatedPassword !== '' &&
+      this.first_name.trim() !== '' &&
+      this.last_name.trim() !== '' &&
+      this.address.trim() !== '' &&
+      this.phone.trim() !== '' &&
+      this.email.includes('@')
+    );
+  }
+
+
   validateInputs(): boolean {
     const password: string = this.password || '';
-    const confirmPassword: string = this.repeatedPassword|| '';
+    const confirmPassword: string = this.repeatedPassword || '';
     const email: string = this.email || '';
     const phone: string = this.phone || '';
     const address: string = this.address || '';
