@@ -163,4 +163,22 @@ export class ToastComponent {
     });
     await this.waitOfPromise();
   }
+
+  async showChangeQualitySuccessfully(message: string = 'Qualität erfolgreich geändert!'){
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Erfolgreich',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
+
+  async showChangeQualityError(message: string = 'Änderung fehlgeschlagen!'){
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Fehlgeschlagen',
+      detail: message,
+    });
+    await this.waitOfPromise();
+  }
 }

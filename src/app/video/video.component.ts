@@ -3,24 +3,24 @@ import Hls from 'hls.js';
 import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../shared/services/video.service';
-import { LocalStorageService } from '../shared/services/local-storage.service';
 import { Video } from '../shared/interfaces/video.interface';
+import { ToastComponent } from '../shared/components/toast/toast.component';
 
 
 
 
 @Component({
   selector: 'app-video',
-  imports: [CommonModule],
+  imports: [CommonModule, ToastComponent],
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss'],
 
 })
 
 
-
 export class VideoComponent {
 
+  @ViewChild(ToastComponent) toastComponent!: ToastComponent;
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef<HTMLVideoElement>;
   @Output() close = new EventEmitter<void>();
   @Input() video!: Video;
@@ -28,14 +28,14 @@ export class VideoComponent {
 
   @Output() favoriteToggled = new EventEmitter<{ videoId: number; favorited: boolean }>();
 
-  isLoadingFav = false;  
-  @Input() isFavorited = false;                    
+  isLoadingFav = false;
+  @Input() isFavorited = false;
 
   isVideoLoaded = false;
   availableLevels: any[] = [];
   hls: Hls | null = null;
 
-  constructor(private videoService: VideoService) {  }
+  constructor(private videoService: VideoService) { }
 
   onVideoClick(): void {
     const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
@@ -65,15 +65,15 @@ export class VideoComponent {
     const index = parseInt(selectedIndex, 10);
     if (this.hls) {
       this.hls.currentLevel = index;
+      this.toastComponent.showChangeQualitySuccessfully();
     }
+    else
+      this.toastComponent.showChangeQualityError();
   }
 
   capitalizeTitle(title: string): string {
     const replaced = title.replace(/-/g, ' ');
-    return replaced
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    return replaced.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
   closeDialog(): void {
@@ -81,18 +81,18 @@ export class VideoComponent {
   }
 
   onFavourite() {
-    if (this.isLoadingFav) 
+    if (this.isLoadingFav)
       return;
     this.isLoadingFav = true;
     this.videoService.toggleFavoriteVideo(this.currentSubProfileId, parseInt(this.video.id)).subscribe({
-        next: res => {
-          this.isFavorited = res.favorited;
-          this.favoriteToggled.emit({ videoId: res.video_id, favorited: res.favorited });
-          this.isLoadingFav = false;          
-        },
-        error: () => {
-          this.isLoadingFav = false;
-        }
-      });
+      next: res => {
+        this.isFavorited = res.favorited;
+        this.favoriteToggled.emit({ videoId: res.video_id, favorited: res.favorited });
+        this.isLoadingFav = false;
+      },
+      error: () => {
+        this.isLoadingFav = false;
+      }
+    });
   }
 }
