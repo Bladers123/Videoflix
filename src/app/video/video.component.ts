@@ -38,7 +38,7 @@ export class VideoComponent {
   constructor(private videoService: VideoService) { }
 
   onVideoClick(): void {
-    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;
+    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;    
     if (!this.isVideoLoaded) {
       if (Hls.isSupported()) {
         this.hls = new Hls({ autoStartLoad: false });

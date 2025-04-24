@@ -8,7 +8,7 @@
       <ng-template let-video #item>
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
-          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" src="img/poster-movie.jpg"
+          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" [src]="video.thumbnail ? video.thumbnail : 'img/poster-movie.jpg'"
             alt="poster">
         </div>
       </ng-template>
@@ -22,7 +22,7 @@
       <ng-template let-video #item>
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
-          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" src="img/poster-clip.jpg"
+          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" [src]="video.thumbnail ? video.thumbnail : 'img/poster-clip.jpg'"
             alt="poster">
         </div>
       </ng-template>
@@ -37,7 +37,7 @@
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
           <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style"
-            src="img/poster-favourite.png" alt="poster">
+          [src]="video.thumbnail ? video.thumbnail : 'img/poster-favourite.png'" alt="poster">
         </div>
       </ng-template>
     </p-carousel>

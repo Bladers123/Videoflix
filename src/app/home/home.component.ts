@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
       if (isVerified && currentSubProfileId) {
         this.currentSubProfileId = currentSubProfileId;
         this.initVideos();
-        this.initResponsiveOptions();
+        this.initResponsiveOptions();        
       }
     });
   }

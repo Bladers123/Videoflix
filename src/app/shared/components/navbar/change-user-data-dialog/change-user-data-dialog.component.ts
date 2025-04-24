@@ -57,7 +57,7 @@ export class ChangeUserDataDialogComponent implements OnInit {
         .pipe(take(1))
         .subscribe({
           next: (profile: Profile | null) => {
-            if (profile) {
+            if (profile) {              
               this.profile = profile;
               this.imageSrc = profile.img || 'img/blank-profile.png';
             }
@@ -93,6 +93,7 @@ export class ChangeUserDataDialogComponent implements OnInit {
       formData.append('password', this.profile.password);
       formData.append('address', this.profile.address);
       formData.append('phone', this.profile.phone);
+
       if (this.selectedFile) {
         formData.append('img', this.selectedFile, this.selectedFile.name);
       }
