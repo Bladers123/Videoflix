@@ -1,8 +1,7 @@
 export const environment = {
   production: false,  // Produktion
 
-
-  BASE_URL: 'http://127.0.0.1:8000/api/',
+  BASE_URL: 'https://videoflix-api.tristan-gehring.com/api/',
 
   ENDPOINT_REGISTRATION: 'auth/registration/',
   ENDPOINT_LOGIN: 'auth/login/',
