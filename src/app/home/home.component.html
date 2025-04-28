@@ -1,43 +1,49 @@
 <app-navbar></app-navbar>
-<div class="top-level mr-6 ml-6 mt-6 content-responsive">
+<div class="top-level mt-6 content-responsive">
 
-  <div>
-    <h2>Filme</h2>
+  <div *ngIf="responsiveOptions"> 
+    <h2 class="ml-3">Filme</h2>
     <p-carousel [value]="movies" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
-        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
-          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" [src]="video.thumbnail ? video.thumbnail : 'img/poster-movie.jpg'"
-            alt="poster">
+          <div class="poster-ratio">
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+              alt="poster" />
+          </div>
         </div>
       </ng-template>
     </p-carousel>
   </div>
 
-  <div>
-    <h2>Clips</h2>
+  <div *ngIf="responsiveOptions">
+    <h2 class="ml-3">Clips</h2>
     <p-carousel [value]="clips" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
-        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
-          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style" [src]="video.thumbnail ? video.thumbnail : 'img/poster-clip.jpg'"
-            alt="poster">
+          <div class="poster-ratio">
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+              alt="poster" />
+          </div>
         </div>
       </ng-template>
     </p-carousel>
   </div>
 
-  <div>
-    <h2>Meine Liste</h2>
+  <div *ngIf="responsiveOptions">
+    <h2 class="ml-3">Meine Liste</h2>
     <p-carousel [value]="favoriteVideos" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
-        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded">
+        <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
-          <img class="poster-responsive h-12rem w-18rem cursor-pointer border-1 border-200 border-style"
-          [src]="video.thumbnail ? video.thumbnail : 'img/poster-favourite.png'" alt="poster">
+          <div class="poster-ratio">
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+              alt="poster" />
+          </div>
         </div>
       </ng-template>
     </p-carousel>

@@ -1,9 +1,9 @@
-<div class="top-level flex flex-column justify-content-between align-items-center h-full overflow-scroll p-8 details">
-  
+<div class="top-level flex flex-column justify-content-between align-items-center h-full overflow-scroll p-3 details relative">
+
   <div class="flex flex-column bg-grey-300 border-round shadow-4 p-5">
     <h1 class="text-6xl">Titel: {{ capitalizeTitle(video.title) }}</h1>
     <span class="text-3xl underline">Beschreibung:</span>
-    <p class="text-2xl">{{video.description}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda, impedit minus amet ullam hic quas quisquam sequi quidem aliquam magnam architecto, ut ad ipsam sit! Quasi in cum debitis quas.</p>
+    <p class="text-2xl">{{video.description}}</p>
     <p class="text-1xl">Hochgeladen am: {{video.uploaded_at | date: 'dd/MM/yyyy'}}</p>
     <div (click)="onFavourite()" class="cursor-pointer flex align-items-center">
       <img [src]="isFavorited ? 'img/like.png' : 'img/no-like.png'" alt="like-img">
@@ -15,7 +15,7 @@
 
   <img (click)="closeDialog()" class="close absolute w-2rem cursor-pointer hover:transition-ease-in" src="img/close.png"
     alt="close">
-  <video class="max-w-full max-h-[80vh]" #videoPlayer controls width="1200" height="800" poster="img/play.png"
+  <video class="max-w-full max-h-[80vh] video-player" #videoPlayer controls poster="img/play.png"
     (click)="onVideoClick()"></video>
 
   <div *ngIf="availableLevels.length > 0" class="quality-selector mt-5">
