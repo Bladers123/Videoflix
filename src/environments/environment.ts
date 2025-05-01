@@ -15,7 +15,7 @@ export const environment = {
     ENDPOINT_VIDEO_FAVOURITE_NAME: 'video/favourite-name/',
     ENDPOINT_VIDEONAME: 'video/videoname/',
     ENDPOINT_VIDEO: 'video/',
-    ENDPOINT_VIDEO_LIST: 'video-list/',
+    ENDPOINT_VIDEO_LIST: 'videos/',
 
 
     QUERY_PARAM_PROFILE: '?profile=',
