@@ -60,10 +60,7 @@ export class VideoService {
   }
 
   playVideo(videoElement: HTMLVideoElement, videoType: string, title: string): Promise<{ hls?: Hls; levels: HlsLevel[] }> {
-    const { url, headers } = this.restClientService.getVideoUrlAndHeader(
-      videoType,
-      title
-    );
+    const { url, headers } = this.restClientService.getVideoUrlAndHeader(videoType, title);
 
     if (Hls.isSupported()) {
       return this.playWithHls(videoElement, url, headers);
@@ -88,10 +85,7 @@ export class VideoService {
     return new Promise((resolve, reject) => {
       this.hlsInstance!.on(Hls.Events.MANIFEST_PARSED, () => {
         this.hlsInstance!.startLoad();
-        videoElement
-          .play()
-          .then(() => resolve({ hls: this.hlsInstance!, levels: this.hlsInstance!.levels as HlsLevel[] }))
-          .catch(reject);
+        videoElement.play().then(() => resolve({ hls: this.hlsInstance!, levels: this.hlsInstance!.levels as HlsLevel[] })).catch(reject);
       });
       this.hlsInstance!.on(Hls.Events.ERROR, (_evt, data) => reject(data));
     });
@@ -106,9 +100,7 @@ export class VideoService {
         const blobUrl = URL.createObjectURL(blob);
         videoElement.src = blobUrl;
         return new Promise<{ hls?: Hls; levels: HlsLevel[] }>(resolve => {
-          videoElement.addEventListener(
-            'loadedmetadata',
-            () => {
+          videoElement.addEventListener('loadedmetadata', () => {
               videoElement.play();
               resolve({ hls: this.hlsInstance, levels: [] });
             },

@@ -3,6 +3,8 @@
 body {
     margin: 0;
     font-family: cursive;
+    color: white;
+    background-color: #20202a;
 }
 
 .top-level {
@@ -20,3 +22,9 @@ body {
 }
 
 
+.p-floatlabel:has(input:focus) label,
+.p-floatlabel:has(input:-webkit-autofill) label,
+.p-floatlabel:has(textarea:focus) label,
+.p-floatlabel:has(.p-inputwrapper-focus) label {
+  color: rgb(80, 74, 74) !important;
+}

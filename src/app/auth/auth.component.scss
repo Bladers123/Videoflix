@@ -24,15 +24,6 @@
     height: 60px
 }
 
-// entfernt Farbe des Labels im Inputfield
-.p-floatlabel:has(input:focus) label,
-.p-floatlabel:has(input:-webkit-autofill) label,
-.p-floatlabel:has(textarea:focus) label,
-.p-floatlabel:has(.p-inputwrapper-focus) label {
-    color: inherit !important;
-}
-
-
 @media screen and (max-height: 900px) {
     .content-responsive {
         height: 91vh;

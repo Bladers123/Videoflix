@@ -8,22 +8,15 @@
 }
 
 .dialog-content {
-  background-color: rgb(24, 21, 21);
-  box-shadow: 0 2px 8px rgb(233 158 158 / 90%);
+  background-color: #20202a;
+  /* CC = 204 in Hex = 0.8 * 255 */
+  box-shadow: 0 2px 8px rgba(233, 158, 158, 0.9);
   max-height: 95vh;
   overflow-y: auto;
 }
 
 .height-60px {
   height: 60px
-}
-
-// entfernt Farbe des Labels im Inputfield
-.p-floatlabel:has(input:focus) label,
-.p-floatlabel:has(input:-webkit-autofill) label,
-.p-floatlabel:has(textarea:focus) label,
-.p-floatlabel:has(.p-inputwrapper-focus) label {
-  color: inherit !important;
 }
 
 .close {
@@ -46,12 +39,12 @@
   }
 }
 
-@media screen and (max-height: 900px) {  
+@media screen and (max-height: 900px) {
   .content-responsive {
     height: 91vh !important;
   }
 
-  .header{
+  .header {
     margin-top: 570px !important;
   }
 }

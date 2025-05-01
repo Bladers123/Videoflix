@@ -8,7 +8,7 @@
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="username-input" [(ngModel)]="username"
                 autocomplete="on" [ngClass]="{'p-filled': username}" />
-            <label class="w-full" for="username-input">*Nutzername</label>
+            <label class="w-full text-black" for="username-input">*Nutzername</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-11" variant="in">
@@ -20,13 +20,13 @@
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="firstname-input" [(ngModel)]="first_name"
                 autocomplete="on" [ngClass]="{'p-filled': first_name}" />
-            <label class="w-full" for="firstname-input">Vorname</label>
+            <label class="w-full" for="firstname-input">*Vorname</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="lastname-input" [(ngModel)]="last_name"
                 autocomplete="on" [ngClass]="{'p-filled': last_name}" />
-            <label class="w-full" for="lastname-input">Nachname</label>
+            <label class="w-full" for="lastname-input">*Nachname</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-11" variant="in">
@@ -44,13 +44,13 @@
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="address-input" [(ngModel)]="address"
                 autocomplete="on" [ngClass]="{'p-filled': address}" />
-            <label class="w-full" for="address-input">Vollständige Adresse</label>
+            <label class="w-full" for="address-input">*Vollständige Adresse</label>
         </p-floatlabel>
 
         <p-floatlabel class="w-11" variant="in">
             <input class="w-full height-60px pt-3 pl-2 pr-2" pInputText id="phone-input" [(ngModel)]="phone"
                 autocomplete="on" [ngClass]="{'p-filled': phone}" />
-            <label class="w-full" for="phone-input">Telefonnummer</label>
+            <label class="w-full" for="phone-input">*Telefonnummer</label>
         </p-floatlabel>
 
         <button (click)="registerUser()" [disabled]="isRegistered || !isFormValid"  class="p-3 w-11 text-xl bg-red-600 border-none border-round cursor-pointer hover:bg-red-400">Registrieren</button>
