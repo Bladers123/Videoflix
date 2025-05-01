@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <div class="top-level mt-6 content-responsive">
 
-  <div *ngIf="responsiveOptions"> 
-    <h2 class="ml-3">Filme</h2>
+  <div *ngIf="responsiveOptions">
+    <h1 class="text-center underline mt-8">Filme</h1>
     <p-carousel [value]="movies" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
@@ -18,7 +18,7 @@
   </div>
 
   <div *ngIf="responsiveOptions">
-    <h2 class="ml-3">Clips</h2>
+    <h1 class="text-center underline mt-8">Clips</h1>
     <p-carousel [value]="clips" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
@@ -34,7 +34,7 @@
   </div>
 
   <div *ngIf="responsiveOptions">
-    <h2 class="ml-3">Meine Liste</h2>
+    <h1 class="text-center underline mt-8">Meine Liste</h1>
     <p-carousel [value]="favoriteVideos" [numVisible]="4" [numScroll]="4" [circular]="false"
       [responsiveOptions]="responsiveOptions">
       <ng-template let-video #item>
