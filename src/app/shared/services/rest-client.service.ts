@@ -6,7 +6,6 @@ import { UserRegistration } from '../interfaces/register.interface';
 import { environment } from '../../../environments/environment';
 import { UserLogin } from '../interfaces/login.interface';
 import { RequestRecoverPassword } from '../interfaces/request-recovery-password.interface';
-import { AuthService } from './auth.service';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../interfaces/user.interface';
 import { SubProfile } from '../interfaces/sub-profile.interace';
@@ -111,5 +110,11 @@ export class RestClientService {
   postToggleFavoriteVideo(subProfileId: string, videoId: number): Observable<{ video_id: number; favorited: boolean }> {
     const headers = this.getAuthorizationTokenHeader();
     return this.httpClient.post<{ video_id: number; favorited: boolean }>(environment.BASE_URL + environment.ENDPOINT_SUBPROFILE + subProfileId + "/add-favorite/", { video_id: videoId }, { headers });
+  }
+
+  getVideoUrlAndHeader(video_type: string, title: string) {
+    const headers = this.getAuthorizationTokenHeader();
+    const url = environment.BASE_URL + environment.ENDPOINT_VIDEO + video_type + '/' + title;
+    return { url, headers };
   }
 }

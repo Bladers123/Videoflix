@@ -1,12 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import Hls from 'hls.js';
-import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../shared/services/video.service';
 import { Video } from '../shared/interfaces/video.interface';
 import { ToastComponent } from '../shared/components/toast/toast.component';
-
-
+import { RestClientService } from '../shared/services/rest-client.service';
 
 
 @Component({
@@ -33,32 +31,19 @@ export class VideoComponent {
 
   isVideoLoaded = false;
   availableLevels: any[] = [];
-  hls: Hls | null = null;
+  hls?: Hls;
 
-  constructor(private videoService: VideoService) { }
+  constructor(private videoService: VideoService, private restclientService: RestClientService) { }
 
   onVideoClick(): void {
-    const videoUrl = environment.BASE_URL + environment.ENDPOINT_VIDEO + this.video.video_type + '/' + this.video.title;    
-    if (!this.isVideoLoaded) {
-      if (Hls.isSupported()) {
-        this.hls = new Hls({ autoStartLoad: false });
-        this.hls.loadSource(videoUrl);
-        this.hls.attachMedia(this.videoPlayer.nativeElement);
-        this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          this.hls?.startLoad();
-          if (this.videoPlayer && this.videoPlayer.nativeElement) {
-            this.videoPlayer.nativeElement.play();
-          }
-          this.availableLevels = this.hls?.levels || [];
-        });
-      } else if (this.videoPlayer.nativeElement.canPlayType('application/vnd.apple.mpegurl')) {
-        this.videoPlayer.nativeElement.src = videoUrl;
-        this.videoPlayer.nativeElement.addEventListener('loadedmetadata', () => {
-          this.videoPlayer.nativeElement.play();
-        });
-      }
+    if (this.isVideoLoaded)
+      return;
+
+    this.videoService.playVideo(this.videoPlayer.nativeElement, this.video.video_type, this.video.title).then(({ hls, levels }) => {
+      this.hls = hls;
+      this.availableLevels = levels;
       this.isVideoLoaded = true;
-    }
+    }).catch(err => this.toastComponent.showLoadingError(err));
   }
 
   changeQuality(selectedIndex: string): void {
@@ -77,6 +62,11 @@ export class VideoComponent {
   }
 
   closeDialog(): void {
+    this.close.emit();
+  }
+
+  ngOnDestroy(): void {
+    this.videoService.destroy();
     this.close.emit();
   }
 

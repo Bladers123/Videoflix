@@ -22,3 +22,4 @@ export const environment = {
     QUERY_PARAM_ID: '?id=',
   };
   
+// deployment command: ng build --configuration production --base-href /Videoflix/ --deploy-url /Videoflix/
