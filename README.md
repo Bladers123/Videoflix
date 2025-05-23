@@ -11,7 +11,7 @@
   ```
 
 ## Getting Started
-# 1. Clone the Repository
+### 1. Clone the Repository
 Open your terminal and run:
   ```bash
   git clone https://github.com/Bladers123/Videoflix.git
@@ -19,7 +19,7 @@ Open your terminal and run:
   ```
 Make sure you're inside the frontend folder.
 
-## 2. Install Dependencies
+### 2. Install Dependencies
 Run the following command to install all required packages:
  ```bash
   npm install
@@ -27,7 +27,7 @@ Run the following command to install all required packages:
 
 
 
-# 3. Start the Development Server
+### 3. Start the Development Server
 To run the project locally:
 ```bash
   ng serve
