@@ -1,36 +1,49 @@
-```bash
-ng serve
-```
-# Projekt-Setup-Anleitung Videoflix (Frontend)
-## Diese Anleitung beschreibt die Schritte zur Installation und Konfiguration des Projekts Videoflix in VS-Code.
+# Project Setup Guide – Videoflix (Frontend)
+## This guide outlines the steps required to install and configure the Videoflix frontend project in Visual Studio Code.
 
-## Installation und Einrichtung
-  Lade dir VS-Code herunter und starte es. Öffne das Projekt (Folder) Videoflix.
-
-## Im Terminal
-  Node.js (empfohlen: LTS-Version) – https://nodejs.org/en
-  Angular CLI – global mit folgendem Befehl installieren:
+## Prerequisites
+  Before starting, ensure the following tools are installed on your system:
+  - Visual Studio Code
+  - Node.js (LTS version recommended)
+  - Angular CLI – Install globally using:
   ```bash
   npm install -g @angular/cli
   ```
 
- # Repository klonen
- # Abhängigkeiten installieren
-   ```bash
-   npm install
-   ```
+## Getting Started
+# 1. Clone the Repository
+Open your terminal and run:
+  ```bash
+  git clone https://github.com/Bladers123/Videoflix.git
+  cd videoflix-frontend
+  ```
+Make sure you're inside the frontend folder.
 
-# Projekt starten
+## 2. Install Dependencies
+Run the following command to install all required packages:
+ ```bash
+  npm install
+  ```
+
+
+
+# 3. Start the Development Server
+To run the project locally:
+```bash
+  ng serve
+  ```
+Navigate to http://localhost:4200/ in your browser to view the app.
+ 
+
+
+## Projekt starten
   ```bash
   ng serve
   ```
 
-# Config (environment.ts)
-  Dort können Konfigurationen angepasst werden, falls sich im Backend etwas ändern sollte.
-
-# Framework
+## Project Environment
 Angular CLI: 19.2.1
 Node: 22.14.0
 Package Manager: npm 11.2.0
-OS: win32 x64
+Operating System: Windows (64-bit)
 
