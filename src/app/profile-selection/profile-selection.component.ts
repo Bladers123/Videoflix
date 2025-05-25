@@ -46,6 +46,13 @@ export class ProfileSelectionComponent implements OnInit {
     phone: ''
   };
 
+    colorPalette: string[] = [
+    'bg-blue-700',
+    'bg-red-600',
+    'bg-purple-600',
+    'bg-white',
+  ];
+
   constructor(private authService: AuthService, private profileService: ProfileService, private subProfileService: SubProfileService, private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
@@ -55,6 +62,10 @@ export class ProfileSelectionComponent implements OnInit {
         this.loadSubProfiles();
       }
     });
+  }
+
+   getColor(index: number): string {
+    return this.colorPalette[index % this.colorPalette.length];
   }
 
 
