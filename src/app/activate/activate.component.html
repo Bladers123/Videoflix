@@ -1,8 +1,11 @@
-<div *ngIf="loading">Aktiviere …</div>
-    <div *ngIf="!loading && activated">
-      <h2>🎉 Dein Konto wurde aktiviert!</h2>
+<div class="flex flex-column justify-content-center align-items-center mt-8">
+    <div *ngIf="loading">Aktiviere …</div>
+    <div *ngIf="!loading && activated" class="flex flex-column justify-content-center align-items-center">
+        <h2>🎉 Dein Konto wurde erfolgreich aktiviert!</h2>
+        <p>Du kannst diese Seite nun schließen.</p>
     </div>
-    <div *ngIf="!loading && !activated">
-      <h2>❌ Aktivierung fehlgeschlagen.</h2>
-      <p>Der Link ist ungültig oder abgelaufen.</p>
+    <div *ngIf="!loading && !activated" class="flex flex-column justify-content-center align-items-center">
+        <h2>❌ Aktivierung des Kontos fehlgeschlagen.</h2>
+        <p>Der Link ist ungültig oder abgelaufen.</p>
     </div>
+</div>
