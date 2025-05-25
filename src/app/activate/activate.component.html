@@ -1,0 +1,8 @@
+<div *ngIf="loading">Aktiviere …</div>
+    <div *ngIf="!loading && activated">
+      <h2>🎉 Dein Konto wurde aktiviert!</h2>
+    </div>
+    <div *ngIf="!loading && !activated">
+      <h2>❌ Aktivierung fehlgeschlagen.</h2>
+      <p>Der Link ist ungültig oder abgelaufen.</p>
+    </div>
