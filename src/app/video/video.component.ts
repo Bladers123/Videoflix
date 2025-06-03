@@ -39,11 +39,30 @@ export class VideoComponent {
     if (this.isVideoLoaded)
       return;
 
-    this.videoService.playVideo(this.videoPlayer.nativeElement, this.video.video_type, this.video.title).then(({ hls, levels }) => {
+    const baseName = this.getVideoFileName();
+
+    this.videoService.playVideo(this.videoPlayer.nativeElement, this.video.video_type, baseName).then(({ hls, levels }) => {
       this.hls = hls;
       this.availableLevels = levels;
       this.isVideoLoaded = true;
     }).catch(err => this.toastComponent.showLoadingError(err));
+  }
+
+  private getVideoFileName(): string {
+    const videoFile = this.video.video_file;
+
+    if (!videoFile) {
+      return '';
+    }
+
+    const fileName = videoFile;
+    const lastSlash = fileName.lastIndexOf('/');
+    const lastDot = fileName.lastIndexOf('.');
+    if (lastSlash >= 0 && lastDot > lastSlash) {
+      return fileName.substring(lastSlash + 1, lastDot);
+    }
+
+    return fileName;
   }
 
   changeQuality(selectedIndex: string): void {
@@ -55,6 +74,8 @@ export class VideoComponent {
     else
       this.toastComponent.showChangeQualityError();
   }
+
+
 
   capitalizeTitle(title: string): string {
     const replaced = title.replace(/-/g, ' ');
