@@ -9,7 +9,7 @@
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
           <div class="poster-ratio">
-            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-movie.jpg'"
               alt="poster" />
           </div>
         </div>
@@ -25,7 +25,7 @@
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
           <div class="poster-ratio">
-            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-clip.jpg'"
               alt="poster" />
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div (click)="onPoster(video)" class="m-2 p-2 shadow-md rounded poster-card">
           <h3>{{ capitalizeTitle(video.title) }}</h3>
           <div class="poster-ratio">
-            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-default.jpg'"
+            <img class="poster-img cursor-pointer" [src]="video.thumbnail ? video.thumbnail : 'img/poster-favourite.jpg'"
               alt="poster" />
           </div>
         </div>
