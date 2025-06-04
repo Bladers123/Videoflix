@@ -2,12 +2,6 @@
     box-shadow: 0 2px 8px rgb(233 158 158 / 90%);
 }
 
-
-
-
-
-/* ab 1200px bleiben’s 4 Items */
-/* Karten-Wrapper zentriert Inhalt */
 .poster-card {
     display: flex;
     flex-direction: column;
@@ -33,7 +27,6 @@
 }
 
 
-/* ab 1200px: immer 4 Spalten */
 @media (min-width: 1200px) {
   :host ::ng-deep .p-carousel .p-carousel-item {
     flex: 0 0 calc(100% / 4) !important;
@@ -41,7 +34,6 @@
   }
 }
 
-/* ab 768px bis 1199px: 3 Spalten */
 @media (min-width: 768px) and (max-width: 1199px) {
   :host ::ng-deep .p-carousel .p-carousel-item {
     flex: 0 0 calc(100% / 3) !important;
@@ -49,7 +41,6 @@
   }
 }
 
-/* ab 576px bis 767px: 2 Spalten */
 @media (min-width: 576px) and (max-width: 767px) {
   :host ::ng-deep .p-carousel .p-carousel-item {
     flex: 0 0 calc(100% / 2) !important;
@@ -57,7 +48,6 @@
   }
 }
 
-/* unter 576px: 1 Spalte */
 @media (max-width: 575px) {
   :host ::ng-deep .p-carousel .p-carousel-item {
     flex: 0 0 100% !important;
