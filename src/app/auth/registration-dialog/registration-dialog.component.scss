@@ -10,6 +10,8 @@
 .dialog-content {
   box-shadow: 0 2px 8px rgb(233 158 158 / 90%);
   height: 80vh;
+  overflow: auto;
+
 }
 
 .height-60px {
@@ -38,4 +40,7 @@
   .content-responsive {
     height: 91vh !important;
   }
+}
+
+@media (min-width: 900px) and (max-width: 1440px) {
 }

@@ -1,4 +1,4 @@
-<div class="top-level flex justify-content-center align-items-center flex-column h-screen responsive">
+<div class="top-level flex justify-content-center align-items-center flex-column h-screen responsive margin">
     <label class="text-6xl header text-center ">Wer schaut gerade?</label>
     <div class="flex align-items-center justify-content-around w-full mt-8 flex-wrap">
         <div (click)="navigateToHome(subProfile.id!)" *ngFor="let subProfile of subProfiles; let i = index" class="flex flex-column align-items-center cursor-pointer">

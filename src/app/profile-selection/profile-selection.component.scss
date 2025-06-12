@@ -8,10 +8,15 @@
     }
 }
 
+.margin {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
 .box {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     box-shadow: 0 2px 15px rgb(199 224 207 / 90%);
-    
+
     &:hover {
         transform: scale(1.05);
     }
